@@ -4,6 +4,7 @@
  *}
 
 {varType ContentioSdk\Component\AssetLoader $assets}
+{varType Strategio\Controller\ServiceController $controller}
 {varType array $_ENV}
 
 {extends './../../@layout.latte'}
@@ -21,7 +22,15 @@
     </header>
 
     <section class="py-5 py-md-7" style="background-color: rgba(229,76,76,0.9);" id="objednavka">
-        <div id="service-calculator" class="container"></div>
+        <div class="container"
+             id="checkout-with-map"
+             data-buying-packages="false"
+             data-return-url="{$controller->request->getUri()}?thanks=true"
+             data-terms-and-conditions-path="{$controller->link('article_detail', ['label' => 'pravo', 'slug' => 'obchodni-podminky'])}"
+             data-terms-personal-data-path="{$controller->link('article_detail', ['label' => 'pravo', 'slug' => 'zpracovani-osobnich-udaju'])}"
+             data-map-pdf-path="{$assets->get('/img/mapa-pasem.pdf')}"
+        >
+        </div>
     </section>
 
     <section class="bg-white py-5 py-md-10" id="jak-to-funguje">

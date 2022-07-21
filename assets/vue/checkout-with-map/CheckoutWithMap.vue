@@ -56,18 +56,24 @@
         <div class="mt-3 text-center d-flex justify-content-between" v-if="ui.step > 1 && ui.step < 4">
           <span class="small text-black-50">(krok <span class="fw-bold">{{ ui.step }}</span> ze 3)</span>
           <a @click.prevent="nextStep('back')" class="link-secondary" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg><span>zpět</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            <span>zpět</span>
           </a>
         </div>
 
         <div class="mt-4" v-if="ui.step === 1">
-          <a href="/temp/static/img/mapa-pasem.pdf" target="_blank" class="link-secondary">
+          <a :href="ui.mapImgPath" target="_blank" class="link-secondary">
             <span>Přehled tarifních pásem</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="ms-1">
-              <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"/>
-              <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
+                 class="ms-1">
+              <path fill-rule="evenodd"
+                    d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"/>
+              <path fill-rule="evenodd"
+                    d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"/>
             </svg>
           </a>
         </div>
@@ -80,11 +86,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { google } from "google-maps";
-import Axios from "../../typescript/Plugins/Axios";
-import { getHaversineDistance } from "../../typescript/Helpers/Map";
-import { CreateServiceMapCfg } from "../../typescript/Plugins/GoogleMaps";
+import {defineComponent} from "vue";
+import {google} from "google-maps";
+import Axios from "../../typescript/Plugins/OldApiAxios";
+import {getHaversineDistance} from "../../typescript/Helpers/Map";
+import {CreateServiceMapCfg} from "../../typescript/Plugins/GoogleMaps";
 import PriceSummary from "./components/PriceSummary.vue";
 import ContactForm from "./components/ContactForm.vue";
 import BillingForm from "./components/BillingForm.vue";
@@ -93,6 +99,7 @@ import ThankYou from "./components/ThankYou.vue";
 import {smoothScroll} from "../../typescript/Plugins/SmoothScroll";
 
 export default defineComponent({
+  props: ['buyingPackages', 'returnUrl', 'termsAndConditionsPath', 'termsPersonalDataPath', 'mapPdfPath'],
   components: {
     ThankYou,
     PaymentForm,
@@ -124,13 +131,13 @@ export default defineComponent({
       this.map.duration = "0 minut";
       this.map.durationInTraffic = "0 minut";
       this.payment = {
-          type: "",
-          state: null,
-          gw_url: null,
-          order_id: null
+        type: "",
+        state: null,
+        gw_url: null,
+        order_id: null
       }
     },
-    nextStep(step = 'next', to:number|null = null): void {
+    nextStep(step = 'next', to: number | null = null): void {
       if (!to) {
         if (step === 'next') {
           this.ui.step++;
@@ -150,6 +157,10 @@ export default defineComponent({
     return {
       ui: {
         buyingPackage: false,
+        returnUrl: null,
+        termsAndConditionsPath: null,
+        termsPersonalDataPath: null,
+        mapPdfPath: null,
         step: 1,
       },
       pricing: {
@@ -190,7 +201,11 @@ export default defineComponent({
   },
 
   beforeMount() {
-    this.ui.buyingPackage = window.location.pathname === '/pravidelny';
+    this.ui.buyingPackage = this.buyingPackages === 'true';
+    this.ui.returnUrl = this.returnUrl;
+    this.ui.termsAndConditionsPath = this.termsAndConditionsPath;
+    this.ui.termsPersonalDataPath = this.termsPersonalDataPath;
+    this.ui.mapPdfPath = this.mapPdfPath;
   },
 
   async mounted() {
@@ -214,7 +229,7 @@ export default defineComponent({
     const input = this.$refs.contactFormRef.$refs.autocompleteRef;
     const autocomplete = new google.maps.places.Autocomplete(input, serviceMapCfg.autocompleteSettings);
     const map = new google.maps.Map(this.$refs.gmapRef as HTMLDivElement, serviceMapCfg.mapSettings);
-    const marker = new google.maps.Marker({ map, ...serviceMapCfg.markerSettings });
+    const marker = new google.maps.Marker({map, ...serviceMapCfg.markerSettings});
 
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
@@ -232,7 +247,7 @@ export default defineComponent({
       const destination = place.geometry.location;
       const viewport = place.geometry.viewport;
 
-      directionsService.route({ ...serviceMapCfg.routeSettings, destination }, async (response) => {
+      directionsService.route({...serviceMapCfg.routeSettings, destination}, async (response) => {
         const directionsData = response.routes[0].legs[0];
         const haversineDistance = getHaversineDistance(serviceMapCfg.home, destination);
 
@@ -244,7 +259,7 @@ export default defineComponent({
         map.setZoom(17);
 
         const distance = directionsData.distance.value / 1000;
-        const data = (await Axios().post('service/price', { distance: distance })).data;
+        const data = (await Axios().post('service/price', {distance: distance})).data;
 
         this.pricing.price = data.price.value;
         this.map.zone = data.zone;

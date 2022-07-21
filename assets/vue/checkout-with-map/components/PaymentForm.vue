@@ -19,20 +19,20 @@
       <input class="form-check-input" type="radio" name="payment" :value="'online_payment'" id="payment-2" @input="changePayment" :checked="payment.type === 'online_payment'">
       <label class="form-check-label" for="payment-2">
         Online platba kartou
-        <div class="small text-black-50">(Okamžitá platba přes platební bránu GoPay)</div>
+        <span class="d-block small text-black-50">(Okamžitá platba přes platební bránu GoPay)</span>
       </label>
     </div>
     <div class="form-check mb-3">
       <input class="form-check-input" type="radio" name="payment" :value="'bank_transfer'" id="payment-1" @input="changePayment" :checked="payment.type === 'bank_transfer'">
       <label class="form-check-label" for="payment-1">
         Převodem na účet
-        <div class="small text-black-50">(úhrada může trvat i několik dní)</div>
+        <span class="d-block small text-black-50">(úhrada může trvat i několik dní)</span>
       </label>
     </div>
 
     <p class="mt-3 mb-0 text-black-50 small">
-      Odesláním objednávky souhlasíte s <a href="/clanek/obchodni-podminky" target="_blank" class="link-secondary">obchodními podmínkami</a>
-      a&nbsp;<a href="/clanek/gdpr" target="_blank" class="link-secondary">podmínkami ochrany osobních údajů</a>.
+      Odesláním objednávky souhlasíte s <a :href="ui.termsAndConditionsPath" target="_blank" class="link-secondary">obchodními podmínkami</a>
+      a&nbsp;<a :href="ui.termsPersonalDataPath" target="_blank" class="link-secondary">podmínkami ochrany osobních údajů</a>.
     </p>
 
     <button type="submit" class="btn btn-lg w-100 py-3 fw-bold mt-3" :disabled="payment.type === '' || loading" :class="payment.type === '' ? 'btn-secondary' : 'btn-warning shadow'">
@@ -65,7 +65,7 @@
 
 <script type="ts">
 import { defineComponent } from "vue";
-import Axios from "../../../typescript/Plugins/Axios";
+import Axios from "../../../typescript/Plugins/OldApiAxios";
 import { smoothScroll } from "../../../typescript/Plugins/SmoothScroll";
 
 export default defineComponent({
@@ -81,6 +81,7 @@ export default defineComponent({
       this.loading = true;
 
       const post = {
+        return_url: this.ui.returnUrl,
         payment: this.payment.type,
         distance: this.map.distance,
 
@@ -112,6 +113,7 @@ export default defineComponent({
               state: orderResp.data.state,
               order_id: createOrderRes.data.order_id
             });
+
             smoothScroll.animateScroll(anchor);
             this.submitHandler('next');
             this.loading = false;

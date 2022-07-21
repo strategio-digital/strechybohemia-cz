@@ -15,8 +15,8 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import {LoadGoogleMapApi, CreateContactMap} from "./Plugins/GoogleMaps";
 import {hideMenuOnScroll} from "./Plugins/SmoothScroll";
 
-//import {createApp} from "vue";
-//import ServiceCalculator from "../vue/service-calculator/ServiceCalculator.vue";
+import {createApp} from "vue";
+import CheckoutWithMap from "../vue/checkout-with-map/CheckoutWithMap.vue";
 
 (async () => {
     CookieConsent();
@@ -117,21 +117,14 @@ import {hideMenuOnScroll} from "./Plugins/SmoothScroll";
         }
     ]);
 
-
-    const pathName = window.location.pathname.substring(1, window.location.pathname.length);
-    if (pathName === 'havarijni' || pathName === 'pravidelny') {
-        await LoadGoogleMapApi();
-        CreateContactMap();
-    }
-
     // Google map
     if (document.getElementById('google-map-contacts')) {
         await LoadGoogleMapApi();
         CreateContactMap();
     }
 
-    if (document.getElementById('service-calculator')) {
-        // Todo: vue app
-        //createApp(ServiceCalculator).mount(`#service-calculator`);
+    const app = document.getElementById('checkout-with-map');
+    if (app) {
+        createApp(CheckoutWithMap, {...app.dataset}).mount(`#checkout-with-map`);
     }
 })();

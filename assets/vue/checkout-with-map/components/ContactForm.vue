@@ -3,7 +3,9 @@
 
     <div v-if="ui.buyingPackage" class="form-floating mb-3">
       <select @input="changePackage" class="form-select" id="package" ref="packageRef">
-        <option v-for="option in packages" :value="option.key" :selected="package">{{ option.name + ' - ' + option.price + ' Kč' }}</option>
+        <option v-for="option in packages" :value="option.key" :selected="package">
+          {{ option.name + ' - ' + option.price + ' Kč' }}
+        </option>
       </select>
       <label for="package">
         <span class="text-danger">*</span> Zvolte balíček
@@ -27,7 +29,8 @@
     </div>
 
     <div class="form-floating mb-3">
-      <input @input="changePhone" :value="phone"  type="text" class="form-control" :class="!phoneValid ? 'is-invalid' : ''" id="phone" placeholder="Zadejte telefon">
+      <input @input="changePhone" :value="phone" type="text" class="form-control"
+             :class="!phoneValid ? 'is-invalid' : ''" id="phone" placeholder="Zadejte telefon">
       <label for="phone">* Zadejte telefon</label>
       <div class="invalid-feedback">
         Zadejte číslo v platném formátu př: +420 123 321 123.
@@ -35,7 +38,8 @@
     </div>
 
     <div class="form-floating mb-3">
-      <input @input="changeEmail" :value="email" type="text" class="form-control" :class="!emailValid ? 'is-invalid' : ''" id="email" placeholder="Zadejte e-mail">
+      <input @input="changeEmail" :value="email" type="text" class="form-control"
+             :class="!emailValid ? 'is-invalid' : ''" id="email" placeholder="Zadejte e-mail">
       <label for="email">* Zadejte e-mail</label>
       <div class="invalid-feedback">
         Zadejte e-mail v platném formátu.
@@ -50,17 +54,19 @@
     >
       <span class="fs-6">Objednat {{ ui.buyingPackage ? 'revizní kontrolu' : 'servisního technika' }}</span>
 
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-short"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
       </svg>
     </button>
   </form>
 </template>
 
 <script type="ts">
-import { defineComponent } from "vue";
-import { isEmail, isPhone } from "../../../typescript/Helpers/Validation";
-import Axios from "../../../typescript/Plugins/Axios";
+import {defineComponent} from "vue";
+import {isEmail, isPhone} from "../../../typescript/Helpers/Validator";
+import Axios from "../../../typescript/Plugins/OldApiAxios";
 
 export default defineComponent({
   props: ['phone', 'email', 'package', 'address', 'resetHandler', 'submitHandler', 'ui', 'fullPrice'],
