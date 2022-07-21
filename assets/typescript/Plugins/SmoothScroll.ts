@@ -21,4 +21,4 @@ const hideMenuOnScroll = () => {
     }, false);
 }
 
-export { smoothScroll, hideMenuOnScroll }
+export {smoothScroll, hideMenuOnScroll}

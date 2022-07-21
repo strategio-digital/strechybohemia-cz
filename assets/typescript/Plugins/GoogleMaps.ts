@@ -1,5 +1,5 @@
-import { google } from "google-maps";
-import { Loader } from "@googlemaps/js-api-loader";
+import {google} from "google-maps";
+import {Loader} from "@googlemaps/js-api-loader";
 
 export const LoadGoogleMapApi = () => {
     const loader = new Loader({
@@ -42,8 +42,8 @@ export const CreateContactMap = () => {
             zoom: 12,
             styles: [{
                 stylers: [
-                    { saturation: -100 },
-                    { lightness: 0 }
+                    {saturation: -100},
+                    {lightness: 0}
                 ]
             }]
         })
@@ -91,5 +91,5 @@ export const CreateServiceMapCfg = () => {
         }
     };
 
-    return { home, mapSettings, markerSettings, routeSettings, autocompleteSettings }
+    return {home, mapSettings, markerSettings, routeSettings, autocompleteSettings}
 }

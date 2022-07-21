@@ -1,4 +1,4 @@
-import { google } from "google-maps";
+import {google} from "google-maps";
 
 export const getHaversineDistance = (mk1: google.maps.LatLng, mk2: google.maps.LatLng) => {
     const R = 6371.0710 // Radius of the Earth in kilometers

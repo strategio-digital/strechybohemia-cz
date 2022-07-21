@@ -23,4 +23,4 @@ const isVatId = (vat: string): boolean => {
     return regExp.test(String(vat).toLowerCase());
 }
 
-export { isEmail, isPhone, isZipCode, isCompanyId, isVatId }
+export {isEmail, isPhone, isZipCode, isCompanyId, isVatId}

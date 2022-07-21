@@ -2,7 +2,9 @@
   <form @submit.prevent="makePayment" class="mt-4">
 
     <div class="border p-3 mb-4 rounded bg-light">
-      <p class="mb-2 fw-bold text-danger">Objednávka {{ ui.buyingPackage ? 'revizní kontroly' : 'servisního technika' }}</p>
+      <p class="mb-2 fw-bold text-danger">Objednávka {{
+          ui.buyingPackage ? 'revizní kontroly' : 'servisního technika'
+        }}</p>
       <p class="text-black-50 mb-1">
         Místo {{ ui.buyingPackage ? 'kontroly' : 'opravy' }}:
         <span class="text-dark">{{ form.address }}</span>
@@ -16,14 +18,16 @@
     <div class="h5 mb-3">Zvolte způsob úhrady</div>
 
     <div class="form-check mb-3">
-      <input class="form-check-input" type="radio" name="payment" :value="'online_payment'" id="payment-2" @input="changePayment" :checked="payment.type === 'online_payment'">
+      <input class="form-check-input" type="radio" name="payment" :value="'online_payment'" id="payment-2"
+             @input="changePayment" :checked="payment.type === 'online_payment'">
       <label class="form-check-label" for="payment-2">
         Online platba kartou
         <span class="d-block small text-black-50">(Okamžitá platba přes platební bránu GoPay)</span>
       </label>
     </div>
     <div class="form-check mb-3">
-      <input class="form-check-input" type="radio" name="payment" :value="'bank_transfer'" id="payment-1" @input="changePayment" :checked="payment.type === 'bank_transfer'">
+      <input class="form-check-input" type="radio" name="payment" :value="'bank_transfer'" id="payment-1"
+             @input="changePayment" :checked="payment.type === 'bank_transfer'">
       <label class="form-check-label" for="payment-1">
         Převodem na účet
         <span class="d-block small text-black-50">(úhrada může trvat i několik dní)</span>
@@ -31,11 +35,14 @@
     </div>
 
     <p class="mt-3 mb-0 text-black-50 small">
-      Odesláním objednávky souhlasíte s <a :href="ui.termsAndConditionsPath" target="_blank" class="link-secondary">obchodními podmínkami</a>
-      a&nbsp;<a :href="ui.termsPersonalDataPath" target="_blank" class="link-secondary">podmínkami ochrany osobních údajů</a>.
+      Odesláním objednávky souhlasíte s <a :href="ui.termsAndConditionsPath" target="_blank" class="link-secondary">obchodními
+      podmínkami</a>
+      a&nbsp;<a :href="ui.termsPersonalDataPath" target="_blank" class="link-secondary">podmínkami ochrany osobních
+      údajů</a>.
     </p>
 
-    <button type="submit" class="btn btn-lg w-100 py-3 fw-bold mt-3" :disabled="payment.type === '' || loading" :class="payment.type === '' ? 'btn-secondary' : 'btn-warning shadow'">
+    <button type="submit" class="btn btn-lg w-100 py-3 fw-bold mt-3" :disabled="payment.type === '' || loading"
+            :class="payment.type === '' ? 'btn-secondary' : 'btn-warning shadow'">
       <svg v-if="loading" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 38 38" class="me-2">
         <defs>
           <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
@@ -47,16 +54,20 @@
         <g fill="none" fill-rule="evenodd">
           <g transform="translate(1 1)">
             <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2">
-              <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s"
+                                repeatCount="indefinite"/>
             </path>
             <circle fill="#fff" cx="36" cy="18" r="1">
-              <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s"
+                                repeatCount="indefinite"/>
             </circle>
           </g>
         </g>
       </svg>
-      <svg v-if="!loading" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+      <svg v-if="!loading" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+           class="bi bi-check" viewBox="0 0 16 16">
+        <path
+            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
       </svg>
       <span class="fs-6">Dokončit objednávku</span>
     </button>
@@ -64,9 +75,9 @@
 </template>
 
 <script type="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import Axios from "../../../typescript/Plugins/OldApiAxios";
-import { smoothScroll } from "../../../typescript/Plugins/SmoothScroll";
+import {smoothScroll} from "../../../typescript/Plugins/SmoothScroll";
 
 export default defineComponent({
   props: ['submitHandler', 'payment', 'fullPrice', 'map', 'form', 'billing', 'package', 'ui'],
@@ -75,7 +86,7 @@ export default defineComponent({
   ],
   methods: {
     changePayment(event) {
-      this.$emit('update:payment', { ...this.payment, type: event.target.value });
+      this.$emit('update:payment', {...this.payment, type: event.target.value});
     },
     async makePayment() {
       this.loading = true;
@@ -105,7 +116,7 @@ export default defineComponent({
         const createOrderRes = await Axios().post('order/create', post);
 
         if (this.payment.type === 'online_payment' && createOrderRes.data.gw_url !== null) {
-          _gopay.checkout({ gatewayUrl: createOrderRes.data.gw_url, inline: true }, async () => {
+          _gopay.checkout({gatewayUrl: createOrderRes.data.gw_url, inline: true}, async () => {
             const orderResp = await Axios().get(`order/gopay-notify?id=${createOrderRes.data.gopay_payment_id}`);
             this.$emit('update:payment', {
               ...this.payment,
