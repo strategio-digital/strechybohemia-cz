@@ -16,8 +16,24 @@ class ContactDataset
     public function get(string $key): string
     {
         $data = [
-            'email' => 'get@strategio.digital',
-            'phone' => '+420 606 091 125'
+            'facebook' => 'https://www.facebook.com/strechybohemia/',
+            'instagram' => 'https://www.instagram.com/strechybohemia/',
+            'linkedIn' => 'https://www.linkedin.com/company/st%C5%99echy-bohemia/',
+            
+            'googleMap' => 'https://goo.gl/maps/qWirrSdATmjKyqjy5',
+            'mapyCz' => 'https://mapy.cz/s/loradajudo',
+            
+            'mainEmail' => 'info@strechybohemia.cz',
+            'storePhone' => '+420 608 524 294',
+            'realizationPhone' => '+420 739 405 068',
+            
+            'companyName' => 'Střechy Bohemia s.r.o.',
+            'street' => ' Turovec 34',
+            'city' => 'Turovec',
+            'zip' => '391 21',
+            
+            'companyId' => '25176072',
+            'companyVatId' => 'CZ25176072'
         ];
         
         return $data[$key];

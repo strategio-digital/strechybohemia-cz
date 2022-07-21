@@ -3,13 +3,10 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-{varType ContentioSdk\Component\AssetLoader $assets}
-{varType ContentioSdk\Controller\Base\BaseController $controller}
-
 {extends './../vendor/strategio/contentio-sdk/view/@layout.latte'}
 
-{block html}{/block}
-{block body}bg-blue{/block}
+{block html}h-100 w-100{/block}
+{block body}h-100 w-100{/block}
 
 {block head}
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -21,4 +18,11 @@
     {include './components/page-navbar.latte'}
 {/block}
 
-{block bottom}{/block}
+{block bottom}
+    {include './components/page-footer.latte'}
+{/block}
+
+{block scripts}
+    {include parent}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v11.0" nonce="xqHobkKI"></script>
+{/block}

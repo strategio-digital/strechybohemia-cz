@@ -3,22 +3,30 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  */
 
-$lg-path-fonts: "/temp/static/font";
-$lg-path-images: "/temp/static/img";
-
 @import "vendor/strategio/contentio-sdk/assets/scss/App";
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+// Custom body
+@import "components/body";
 
 // Custom variables
 @import "variables";
 
 // Bootstrap 5
+@import "~bootstrap/scss/mixins/banner";
+//@include bsBanner("");
+
+// scss-docs-start import-stack
+// Configuration
 @import "~bootstrap/scss/functions";
-@import "vendor/bootstrap/variables";
 @import "~bootstrap/scss/variables";
+@import "vendor/bootstrap/variables";
+@import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
+
+// Layout & components
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
@@ -49,29 +57,29 @@ $lg-path-images: "/temp/static/img";
 @import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/placeholders";
+
+// Helpers
 @import "~bootstrap/scss/helpers";
+
+// Utilities
 @import "~bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
 
-// Custom front-end
-@import "components/body";
-@import "components/page-header";
-@import "components/page-footer";
-@import "components/page-shark";
-@import "components/text";
-@import "components/type";
-@import "components/background";
-@import "components/button";
-@import "components/modal";
-@import "components/contact-modal";
-@import "components/contact-person";
-@import "components/form";
-@import "components/big-number";
-@import "components/testimonial";
-@import "components/newsletter";
-@import "components/navigation";
+// Custom components
+@import "components/navbar";
+@import "components/logo";
+@import "components/video-background";
+@import "components/header-character";
+@import "components/navbar-toggler";
+@import "components/google-map-contact";
+@import "components/plan-circle";
 
-// Tiny slider
-@import "~tiny-slider/src/tiny-slider";
-
-// Scrollbars
-@import "~overlayscrollbars/css/OverlayScrollbars.min.css";
+// Light gallery
+@import "lightgallery/scss/lightgallery";
+@import "lightgallery/scss/lg-variables";
+@import "lightgallery/scss/lg-mixins";
+@import "lightgallery/scss/lg-fonts";
+@import "lightgallery/scss/lg-theme-default";
+@import "lightgallery/scss/lg-thumbnail";
+@import "lightgallery/scss/lightgallery-core";

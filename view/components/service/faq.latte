@@ -1,0 +1,41 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType Strategio\Controller\ServiceController $controller}
+{varType Strategio\Model\FaqDataset $faq}
+
+{define accordion array $items, int $openPos}
+    <div class="accordion accordion-flush" id="faq-accordion">
+        {foreach $items as $item}
+            {var $open = $iterator->getCounter() === $openPos}
+            <div class="accordion-item border mb-3 rounded-3">
+                <h2 class="accordion-header rounded-3" id="faq-heading-{$iterator->getCounter()}">
+                    <button class="accordion-button rounded-3 {if !$open}collapsed{/if}" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse-{$iterator->getCounter()}" aria-expanded="{if $open}true{else}false{/if}" aria-controls="faq-collapse-{$iterator->getCounter()}">
+                        {$iterator->getCounter()}. {$item['title']}
+                    </button>
+                </h2>
+                <div id="faq-collapse-{$iterator->getCounter()}" class="accordion-collapse collapse {if $open}show{/if}" aria-labelledby="faq-heading-{$iterator->getCounter()}" data-bs-parent="#faq-accordion">
+                    <div class="accordion-body">{$item['description']|noescape}</div>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+{/define}
+
+<div class="container">
+    <h2 class="mb-4">Nejčastěji Vás zajímá</h2>
+
+    {if $controller->request->getRequestUri() === $controller->link('service_emergency')}
+        {include accordion items: $faq->getEmergency(), openPos: 2}
+        <a href="#objednavka" class="btn btn-primary btn-lg mt-2">
+            <span class="fs-6">Objednat servisního technika</span>
+        </a>
+    {else}
+        {include accordion items: $faq->getRevisions(), openPos: 3}
+        <a href="#cenove-balicky" class="btn btn-primary btn-lg mt-2">
+            <span class="fs-6">Objednat pravidelnou revizi</span>
+        </a>
+    {/if}
+</div>

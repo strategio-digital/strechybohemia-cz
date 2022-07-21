@@ -1,0 +1,10 @@
+{varType Strategio\Controller\ArticleController $controller}
+{varType array $data}
+
+<title>{$data['item']['seoTitle'] ?: $data['item']['title']}</title>
+<meta name="description" content="{$data['item']['seoDescription'] ?: $data['item']['descriptionShort']}">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="{$controller->request->getRequestUri()}">
+<meta property="og:title" content="{$data['item']['openGraphTitle'] ?: $data['item']['seoTitle'] ?: $data['item']['title']}">
+<meta property="og:description" content="{$data['item']['openGraphDescription'] ?: $data['item']['seoDescription'] ?: $data['item']['descriptionShort']}">

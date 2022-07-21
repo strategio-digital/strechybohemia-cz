@@ -1,0 +1,55 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+{varType array $_ENV}
+
+{extends './../../@layout.latte'}
+
+{block head}
+    <title>Opravy a servis sřech 24/7 - Střechy Bohemia</title>
+    <meta name="description" content="Je Vaše střecha v havarijním stavu, nevíte si rady co s tím a potřebujete okamžitou pomoc? Žádný stres, servisní technici jsou tu pro Vás v neustálé v pohotovosti.">
+    <meta property="og:image" content="{$assets->get('/img/facebook-opravy-a-servis.png')}">
+    {include parent}
+{/block}
+
+{block content}
+    <header class="position-relative w-100 overflow-hidden" style="background-color: rgba(232,232,232,0.5)">
+        {include './../../components/service/emergency/header.latte'}
+    </header>
+
+    <section class="py-5 py-md-7" style="background-color: rgba(229,76,76,0.9);" id="objednavka">
+        <div id="service-calculator" class="container"></div>
+    </section>
+
+    <section class="bg-white py-5 py-md-10" id="jak-to-funguje">
+        {include './../../components/service/emergency/simple-plan.latte'}
+    </section>
+
+    <section class="bg-light py-5 py-md-10">
+        {include './../../components/service/faq.latte'}
+    </section>
+
+    <section class="bg-white py-5 py-md-10">
+        {include './../../components/service/about-us.latte'}
+    </section>
+
+    <section class="py-5 py-md-10 bg-light">
+        {include './../../components/service/emergency/dont-be-afraid.latte'}
+    </section>
+
+    <section class="position-relative" style="background-color: rgba(232,232,232,0.5)" id="kontakty">
+        {include './../../components/service/contacts.latte'}
+    </section>
+{/block}
+
+{block scripts}
+    {include parent}
+    {if $_ENV['GOPAY_MODE'] === 'production'}
+        <script src="https://gate.gopay.cz/gp-gw/js/embed.js"></script>
+    {else}
+        <script src="https://gw.sandbox.gopay.com/gp-gw/js/embed.js"></script>
+    {/if}
+{/block}

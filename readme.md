@@ -1,5 +1,5 @@
-# Strategio.digital
-Frontend for [strategio.digital](https://strategio.digital) website based on Contentio-SDK
+# Strechybohemia.cz
+Frontend for [strechybohemia.cz](https://www.strechybohemia.cz) website based on Contentio-SDK
 
 ## Installation guide
 1. `cp .env.example .env`

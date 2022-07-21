@@ -1,0 +1,25 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+
+<video muted loop autoplay class="video-background">
+    <source src="{$assets->get('/img/strechy-bohemia-video.mp4')}" type="video/mp4">
+</video>
+
+<div class="container h-100 py-7 py-md-10 position-relative">
+    <img src="{$assets->get('/img/character.svg')}" alt="Opravy střech" class="header-character">
+    <div class="row d-flex align-items-center">
+        <div class="col-md-9 col-lg-7 col-xxl-6">
+            <h1 class="display-3 fw-bold">Pravidelné revize a&nbsp;kontroly střech</h1>
+            <p class="lead mt-3 mb-lg-4">
+                Spolehlivou a <span class="fw-bold">dlouhodobě fungující střechu</span> bez starostí Vám zajistí pravidelné revize, prohlídky a odborné kontroly.
+            </p>
+            <a href="#cenove-balicky" class="btn btn-primary btn-lg">
+                <span class="fs-6">Objednat pravidelnou revizi</span>
+            </a>
+        </div>
+    </div>
+</div>

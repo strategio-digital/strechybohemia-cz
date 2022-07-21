@@ -1,0 +1,53 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+<form id="contactForm" class="shadow-lg rounded-3 p-4 p-lg-5 mt-4 mt-md-0 bg-light">
+    <h2 class="h3 mb-4 fw-bold">Poptávkový formulář</h2>
+    <div class="form-floating mb-3" data-v-group>
+        <input name="name" id="name" type="text" class="form-control" placeholder="Zadejte jméno a příjmení">
+        <label for="name">
+            <span class="text-danger">*</span> Jméno a příjmení
+        </label>
+        <div class="invalid-feedback" data-v-message></div>
+    </div>
+
+    <div class="form-floating mb-3" data-v-group>
+        <input name="email" id="email" type="email" class="form-control" placeholder="Zadejte e-mail">
+        <label for="email">
+            <span class="text-danger">*</span> E-mail
+        </label>
+        <div class="invalid-feedback" data-v-message></div>
+    </div>
+
+    <div class="form-floating mb-3" data-v-group>
+        <input name="phone" id="phone" type="text" class="form-control" placeholder="Zadejte telefon">
+        <label for="phone">
+            <span class="text-danger">*</span> Telefon
+        </label>
+        <div class="invalid-feedback" data-v-message></div>
+    </div>
+
+    <div class="form-floating mb-3" data-v-group>
+        <input name="city" id="phone" type="text" class="form-control" placeholder="Zadejte místo realizace">
+        <label for="city">
+            <span class="text-danger">*</span> Místo realizace
+        </label>
+        <div class="invalid-feedback" data-v-message></div>
+    </div>
+
+    <div class="form-floating mb-3" data-v-group>
+        <textarea name="message" id="message" rows="10" class="form-control" placeholder="Zadejte zprávu" style="height: 150px"></textarea>
+        <label for="message">
+            <span class="text-danger">*</span> Zpráva
+        </label>
+        <div class="invalid-feedback" data-v-message></div>
+    </div>
+
+    <div data-v-alerts></div>
+
+    <button class="btn-warning shadow btn btn-lg w-100 py-3 fw-bold" type="submit">
+        <span class="fs-6">Odeslat poptávku</span>
+    </button>
+</form>

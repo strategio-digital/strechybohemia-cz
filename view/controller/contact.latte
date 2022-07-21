@@ -1,0 +1,39 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{extends './../@layout.latte'}
+
+{block head}
+    <title>Kontakt | Střechy Bohemia</title>
+    <meta name="description" content="Kontakty Střechy Bohemia">
+    {include parent}
+{/block}
+
+{block content}
+    <section class="py-5 py-sm-7" style="background-color: rgba(225,56,56,0.9);">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-5 col-md-5 text-white">
+                    {include './../components/contact/address.latte'}
+                </div>
+                <div class="col-md-7 col-xl-6 col-xxl-5">
+                    {include './../components/contact/form.latte'}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white">
+        <div class="container text-center mt-5 mt-sm-7">
+            <h2 class="display-5 fw-bold mb-3">Přehled kontaktů</h2>
+            <p class="lead mb-0">Spojte se s námi telefonicky nebo e-mailem, osobně s Vámi vše probereme.</p>
+        </div>
+        {include './../components/contact/members.latte'}
+    </section>
+
+    <section class="position-relative">
+        {include './../components/google-map.latte'}
+    </section>
+{/block}

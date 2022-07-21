@@ -6,8 +6,10 @@
 $image-path: '/temp/static/img';
 $font-path: '/temp/static/font';
 
+$lg-path-fonts: "/temp/static/font";
+$lg-path-images: "/temp/static/img";
+
 $fa-font-path: $font-path;
 
-$orange: #fa950b;
-$blue: #3372e3;
-$blue-dark: #1920ae;
+$blue: #3372e3 !default;
+$blue-dark: #1920ae !default;

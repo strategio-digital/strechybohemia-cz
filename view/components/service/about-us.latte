@@ -1,0 +1,40 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+{varType Strategio\Model\TestimonialDataset $testimonials}
+
+<div class="container">
+    <div class="row d-flex align-items-start align-items-xl-center">
+        <div class="col-lg-4 d-none d-lg-flex">
+            <img src="{$assets->get('/img/roman-kucera-st.jpg')}" alt="Opravy střech - Střechy Bohemia s.r.o." class="img-fluid shadow-sm rounded-3">
+        </div>
+        <div class="col-lg-7 offset-lg-1">
+            <h2 class="h1 mb-0">Střechy známe jako vlastní boty</h2>
+            <figure>
+                <blockquote class="blockquote py-3">
+                    <p>
+                        Tomuto řemeslu se věnujeme celý život, za ta léta jsme realizovali stovky střech po
+                        celé ČR. Vyznáme se v materiálech, známe jejich kvality a víme, jak s nimi pracovat.
+                        Děláme poctivě, a proto umíme předcházet problémům se střechou.
+                    </p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Roman Kučera, <cite>majitel Střechy Bohemia s.r.o.</cite>
+                </figcaption>
+            </figure>
+            <img src="{$assets->get('/img/logo-red-big.svg')}" alt="Opravy a servis střech - Střechy Bohemia s.r.o." width="200" class="me-5">
+        </div>
+
+        <div class="mt-5 mt-lg-8 text-lg-center">
+            <h3 class="h3 mb-5">Vyznáme se v materiálech, jejich kvalitě a víme, jak s nimi pracovat</h3>
+            <div class="row gy-3 gy-md-4">
+                <div class="col-4 col-md-2 col-md-2" n:foreach="$testimonials->getLogos() as $logo">
+                    <img src="{$assets->get($logo['src'])}" alt="{$logo['title']}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

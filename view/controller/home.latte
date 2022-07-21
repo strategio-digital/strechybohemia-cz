@@ -1,29 +1,16 @@
 {*
- * Copyright (c) 2021 Strategio Digital s.r.o.
+ * Copyright (c) 2022 Strategio Digital s.r.o.
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
 {extends './../@layout.latte'}
 
 {block head}
+    <title>Tesařské práce, klempířské práce a pokrývačské práce - Střechy Bohemia</title>
+    <meta name="description" content="Pokrývačské, tesařské a klempířské práce, montujeme kvalitní zahraniční střešní krytiny. Hydroizolace základů proti radonu a spodní vodě. Izolace balkónů, teras, lodžií.">
     {include parent}
-    <meta name="description" content="Přetavte své plány v reálné technologické řešení.">
-    <title>Moderní vývoj webů, aplikací a e-commerce řešení</title>
-{/block}
-
-{block modal}
-    {include './../components/contact-modal.latte'}
 {/block}
 
 {block content}
-    {include './../components/page-header.latte'}
 
-    {include './home/solutions-ready-boxes.latte'}
-    {include './home/solutions-custom.latte'}
-    {include './home/reviews.latte'}
-    {include './home/team.latte'}
-    {include './home/hire.latte'}
-    {*include './component/ebook.latte'*}
-
-    {include './../components/page-footer.latte'}
 {/block}

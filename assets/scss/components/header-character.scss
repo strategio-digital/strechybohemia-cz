@@ -1,0 +1,25 @@
+/**
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ */
+
+.header-character {
+    position: absolute;
+    height: 600px;
+    bottom: 0;
+    right: 0;
+
+    @include media-breakpoint-down(lg) {
+        height: 350px;
+    }
+
+    @include media-breakpoint-down(md) {
+        height: 250px;
+        right: -10%;
+    }
+
+    @include media-breakpoint-down(sm) {
+        right: 0;
+        height: 120px;
+    }
+}

@@ -14,13 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleController extends BaseController
 {
     #[Template(path: __DIR__ . '/../../view/controller/article.latte')]
-    public function index(string $slug): void
+    public function index(string $label, string $slug): void
     {
         $this->addRequest('article', 'POST', "article/show-one", [
             'json' => [
                 'slug' => $slug,
+                'labels' => [$label],
                 'suppressLabels' => true,
-                'suppressFiles' => true,
+                'suppressFiles' => false,
                 'suppressParagraphs' => true,
                 'suppressParagraphFiles' => true,
                 'suppressPrevNext' => true,
@@ -37,6 +38,6 @@ class ArticleController extends BaseController
             $this->renderError($response, $contents);
         }
     
-        $this->template->article = json_decode($contents, true)['item'];
+        $this->template->data = json_decode($contents, true);
     }
 }

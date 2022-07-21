@@ -1,0 +1,26 @@
+/**
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ */
+
+.plan-circle {
+    font-weight: bold;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;;
+    background-color: $secondary;
+    color: $white;
+    width: 100px;
+    height: 100px;
+    min-height: 100px;
+    min-width: 100px;
+    @include font-size(4rem);
+
+    @include media-breakpoint-down(sm) {
+        width: 70px;
+        height: 70px;
+        min-height: 70px;
+        min-width: 70px;
+    }
+}

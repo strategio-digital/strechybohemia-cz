@@ -3,43 +3,59 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  */
 
+import ThumbGen from "../../vendor/strategio/contentio-sdk/assets/typescript/Components/ThumbGen";
 import FormValidator from "../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator";
-import SubscribeForm from "../../vendor/strategio/contentio-sdk/assets/typescript/Components/SubscribeForm";
 import ContactForm from "../../vendor/strategio/contentio-sdk/assets/typescript/Components/ContactForm";
 import CookieConsent from "../../vendor/strategio/contentio-sdk/assets/typescript/Plugins/CookieConsent";
-import Bootstrap from "./Plugins/Bootstrap";
-
-import Navigation from "./Components/Navigation";
-import OverlayScrollbars from "overlayscrollbars";
-import {tns} from 'tiny-slider';
 import {SetupOptions} from "../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator/types";
 
-(() => {
+import Bootstrap from "./Plugins/Bootstrap";
+import lightGallery from "lightgallery";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import {LoadGoogleMapApi, CreateContactMap} from "./Plugins/GoogleMaps";
+import {hideMenuOnScroll} from "./Plugins/SmoothScroll";
+
+//import {createApp} from "vue";
+//import ServiceCalculator from "../vue/service-calculator/ServiceCalculator.vue";
+
+(async () => {
     CookieConsent();
+
+    // Smooth Scroll hide menu
+    hideMenuOnScroll();
 
     // Init Bootstrap
     Bootstrap();
 
-    // Init Scrollbar & Navigation
-    //document.addEventListener("DOMContentLoaded", () => {
-        const body = document.querySelector('body') as HTMLBodyElement;
-        const instance = OverlayScrollbars(body, {});
-        Navigation(instance);
-    //});
+    // Light gallery
+    const galleryContainer = document.querySelector('[data-gallery-container]');
+    let onThumbnailCreate = null;
 
-    // Init slider
-    if (document.getElementById('testimonials')) {
-        tns({
-            items: 1,
-            container: '#testimonials',
-            prevButton: '#testimonial-prev',
-            nextButton: '#testimonial-next',
-            navContainer: '#testimonial-nav-items',
+    if (galleryContainer) {
+        const lg = lightGallery(galleryContainer as HTMLElement, {
+            plugins: [lgThumbnail],
+            licenseKey: 'your_license_key',
+            speed: 300,
         });
+
+        onThumbnailCreate = (params: any, src: string) => {
+            const index = lg.index;
+            const items = lg.getItems();
+            if (items.filter(item => item.src === src).length > 0) {
+                lg.updateSlides(items, index);
+            }
+        }
+    }
+
+    // Thumbnail generator
+    if (onThumbnailCreate) {
+        ThumbGen(onThumbnailCreate);
+    } else {
+        ThumbGen();
     }
 
     // Subscribe From validation rules
-    const rules: SetupOptions = {
+    const settings: SetupOptions = {
         errorClasses: 'is-invalid',
         neutralClasses: 'is-neutral',
         alertSuccessBg: 'bg-light text-success fw-bold mb-3 p-3 rounded-3 text-start',
@@ -53,31 +69,69 @@ import {SetupOptions} from "../../vendor/strategio/contentio-sdk/assets/typescri
         antispamDelay: 15 * 1000
     }
 
-    SubscribeForm(FormValidator(rules), document.getElementById('subscribeForm') as HTMLFormElement | null, [
-        {
-            name: 'email',
-            rules: [
-                {type: 'required', message: 'E-mail je povinný.'},
-                {type: 'max', message: 'Maximální délka e-mailu je 100 znaků.', param: {max: 50}},
-                {type: 'email', message: 'E-mail musí být v platném formátu.'},
-            ]
-        }
-    ]);
-
     ContactForm(FormValidator({
-        ...rules,
+        ...settings,
         errorClasses: 'is-invalid',
         neutralClasses: 'is-neutral',
         alertSuccessBg: 'bg-success text-white fw-bold mb-3 p-3 rounded-3 text-start',
         alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start',
     }), document.getElementById('contactForm') as HTMLFormElement, [
         {
-            name: 'contact',
+            name: 'name',
             rules: [
-                {type: 'required', message: 'Kontakt je povinný.'},
-                {type: 'min', message: 'Kontakt musí obsahovat alespoň 3 znaky.', param: {min: 3}},
-                {type: 'max', message: 'Kontakt může obsahovat maximálně 100 znaků', param: {max: 100}},
+                {type: 'min', message: 'Jméno musí obsahovat alespoň 3 znaky.', param: {min: 3}},
+                {type: 'max', message: 'Jméno může obsahovat maximálně 100 znaků', param: {max: 100}},
+                {type: 'required', message: 'Jméno je povinné.'},
+            ],
+        },
+        {
+            name: 'email',
+            rules: [
+                {type: 'required', message: 'E-mail je povinný.'},
+                {type: 'email', message: 'E-mail musí být v platném formátu.'},
+            ],
+        },
+        {
+            name: 'phone',
+            rules: [
+                {type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: {min: 9}},
+                {type: 'phone', message: 'Telefon musí být v platném formátu.'},
+                {type: 'required', message: 'Telefon je povinný.'},
+            ],
+        },
+        {
+            name: 'city',
+            rules: [
+                {type: 'min', message: 'Místo realizace musí obsahovat alespoň 2 znaky.', param: {min: 2}},
+                {type: 'max', message: 'Místo realizace může obsahovat maximálně 100 znaků', param: {max: 100}},
+                {type: 'required', message: 'Místo realizace je povinné.'},
+            ],
+        },
+        {
+            name: 'message',
+            rules: [
+                {type: 'min', message: 'Zpráva musí obsahovat alespoň 10 znaků.', param: {min: 10}},
+                {type: 'max', message: 'Zpráva může obsahovat maximálně 2 300 znaků', param: {max: 2300}},
+                {type: 'required', message: 'Zpráva je povinná.'},
             ],
         }
     ]);
+
+
+    const pathName = window.location.pathname.substring(1, window.location.pathname.length);
+    if (pathName === 'havarijni' || pathName === 'pravidelny') {
+        await LoadGoogleMapApi();
+        CreateContactMap();
+    }
+
+    // Google map
+    if (document.getElementById('google-map-contacts')) {
+        await LoadGoogleMapApi();
+        CreateContactMap();
+    }
+
+    if (document.getElementById('service-calculator')) {
+        // Todo: vue app
+        //createApp(ServiceCalculator).mount(`#service-calculator`);
+    }
 })();
