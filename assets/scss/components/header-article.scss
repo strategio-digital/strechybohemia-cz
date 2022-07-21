@@ -1,0 +1,24 @@
+/**
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ */
+
+.header-article {
+    .img-icon-container {
+        @include media-breakpoint-down(sm) {
+            display: none;
+        }
+    }
+    .img-icon {
+        width: 140px;
+        height: 140px;
+        @include media-breakpoint-down(lg) {
+            width: 120px;
+            height: 120px;
+        }
+        @include media-breakpoint-down(md) {
+            width: 90px;
+            height: 90px;
+        }
+    }
+}

@@ -38,6 +38,7 @@ class ArticleController extends BaseController
             $this->renderError($response, $contents);
         }
     
+        $this->template->label = $label;
         $this->template->data = json_decode($contents, true);
     }
 }
