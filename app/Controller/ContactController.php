@@ -15,7 +15,6 @@ use ContentioSdk\Debugger\ApiDebugger;
 use Latte\Engine;
 use Strategio\Controller\Base\BaseController;
 use Strategio\Model\ContactDataset;
-use Strategio\Model\MembersDataset;
 use Strategio\Model\NavbarDataset;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,8 +34,6 @@ class ContactController extends BaseController
 
         protected ContactDataset $contactDataset,
         protected NavbarDataset $navbarDataset,
-        
-        protected MembersDataset $membersDataset
     )
     {
     }
@@ -44,6 +41,27 @@ class ContactController extends BaseController
     #[Template(path: __DIR__ . '/../../view/controller/contact.latte')]
     public function index(): void
     {
-        $this->template->members = $this->membersDataset;
+        $this->addRequest('contact_members', 'POST', "article/show-all", [
+            'json' => [
+                'currentPage' => 1,
+                'itemsPerPage' => 100,
+                'desc' => false,
+                'labels' => ['kontakty'],
+                'suppressLabels' => true,
+                'suppressFiles' => false,
+                'suppressParagraphs' => true,
+                'suppressParagraphFiles' => true,
+            ]
+        ]);
+    
+        $responses = $this->dispatchRequests('Contact/Member List');
+        $response = $responses['contact_members'];
+        $contents = $response->getBody()->getContents();
+    
+        if ($response->getStatusCode() !== Response::HTTP_OK) {
+            $this->renderError($response, $contents);
+        }
+    
+        $this->template->data = json_decode($contents, true);
     }
 }

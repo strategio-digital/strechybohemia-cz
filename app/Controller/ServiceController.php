@@ -16,7 +16,6 @@ use Latte\Engine;
 use Strategio\Controller\Base\BaseController;
 use Strategio\Model\ContactDataset;
 use Strategio\Model\FaqDataset;
-use Strategio\Model\MembersDataset;
 use Strategio\Model\NavbarDataset;
 use Strategio\Model\RevisionDataset;
 use Strategio\Model\TestimonialDataset;
@@ -41,7 +40,6 @@ class ServiceController extends BaseController
         
         protected TestimonialDataset $testimonialDataset,
         protected RevisionDataset    $revisionDataset,
-        protected MembersDataset     $membersDataset,
         protected FaqDataset         $faqDataset,
     )
     {
@@ -50,9 +48,30 @@ class ServiceController extends BaseController
     public function startup(): void
     {
         parent::startup();
-        
+    
+        $this->addRequest('contact_members', 'POST', "article/show-all", [
+            'json' => [
+                'currentPage' => 1,
+                'itemsPerPage' => 2,
+                'desc' => false,
+                'labels' => ['kontakty-servis'],
+                'suppressLabels' => true,
+                'suppressFiles' => false,
+                'suppressParagraphs' => true,
+                'suppressParagraphFiles' => true,
+            ]
+        ]);
+    
+        $responses = $this->dispatchRequests('Contact/Member List');
+        $response = $responses['contact_members'];
+        $contents = $response->getBody()->getContents();
+    
+        if ($response->getStatusCode() !== Response::HTTP_OK) {
+            $this->renderError($response, $contents);
+        }
+    
+        $this->template->data = json_decode($contents, true);
         $this->template->testimonials = $this->testimonialDataset;
-        $this->template->members = $this->membersDataset;
         $this->template->faq = $this->faqDataset;
         
         $this->template->envs = json_encode(array_merge((array)json_decode($this->template->envs, true), [

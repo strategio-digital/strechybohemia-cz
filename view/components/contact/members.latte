@@ -3,27 +3,32 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-{varType Strategio\Model\MembersDataset $members}
-{varType ContentioSdk\Component\AssetLoader $assets}
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $data}
 
 <div class="container py-3 py-sm-5">
     <div class="row justify-content-center align-items-lg-stretch pb-4">
-        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-4" n:foreach="$members->get() as $member">
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-4" n:foreach="$data['items'] as $item">
             <div class="rounded-3 text-center bg-light py-5 h-100 d-flex flex-column justify-content-center">
                 <div>
-                    {if $member['photo']}
-                        <img src="{$assets->get($member['photo'])}" class="img-fluid rounded-circle my-4" style="width: 150px" alt="{$member['name']}">
+                    {var $file = current(array_filter($item['files'], fn(array $file) => $file['cover'] === true))}
+
+                    {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                        {var $thumb = $thumbGen->create($file['filePath'], 150, 150)}
+                        <img class="img-fluid rounded-circle border border-4 border-white my-4"
+                             alt="{$file['description'] ?: $item['title']}"
+                             src="{$thumb->getSrc()}"
+                             width="{$thumb->getWidth()}"
+                             height="{$thumb->getHeight()}"
+                        >
                     {/if}
 
-                    <h2 class="h5 fw-bold mb-1">{$member['name']}</h2>
-
-                    {if $member['job']}
-                        <p class="mb-0">{$member['job']}</p>
-                    {/if}
+                    <h2 class="h5 fw-bold mb-1">{$item['title']}</h2>
+                    <p n:if="$item['descriptionExtra']" class="mb-0">{$item['descriptionExtra']}</p>
                 </div>
-                <div class="d-grid small mt-4">
-                    <a href="mailto:{$member['mail']}" target="_blank" class="mb-2">{$member['mail']}</a>
-                    <a href="tel:{$member['phone']|replace:' ', ''}" target="_blank">{$member['phone']}</a>
+                <div class="d-grid small mt-4" n:if="$item['phone'] || $item['email']">
+                    <a n:if="$item['email']" href="mailto:{$item['email']}" target="_blank" class="mb-2">{$item['email']}</a>
+                    <a n:if="$item['phone']" href="tel:{$item['phone']|replace:' ', ''}" target="_blank">{$item['phone']}</a>
                 </div>
             </div>
         </div>

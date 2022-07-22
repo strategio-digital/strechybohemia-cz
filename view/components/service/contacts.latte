@@ -3,9 +3,9 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-{varType ContentioSdk\Component\AssetLoader $assets}
-{varType Strategio\Model\MembersDataset $members}
 {varType Strategio\Model\ContactDataset $contacts}
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $data}
 
 <div class="position-relative">
     <div class="container">
@@ -14,12 +14,21 @@
                 <div class="py-5 py-md-10">
                     <div class="display-3 fw-bold text-uppercase">Kontakty</div>
                     <div class="d-xl-flex mt-3 mt-md-5">
-                        {foreach $members->get(['roman_kucera', 'jan_pribyl']) as $contact}
+                        {foreach $data['items'] as $item}
                             <div class="d-inline-flex align-items-center {if $iterator->isLast()}ms-0 ms-sm-1 ms-md-0 ms-lg-0 ms-xl-3 ms-xxl-5 mt-3 mt-xl-0{/if}">
-                                <img src="{$assets->get($contact['photo'])}" alt="{$contact['name']}" class="rounded-circle" width="60" height="60">
-                                <div class="ms-3 small">
-                                    <a href="mailto:{$contact['mail']}" target="_blank" class="d-block mb-1">{$contact['mail']}</a>
-                                    <a href="tel:{$contact['phone']|trim:' '}" target="_blank" class="d-block">{$contact['phone']}</a>
+                                {var $file = current(array_filter($item['files'], fn(array $file) => $file['cover'] === true))}
+                                {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                                    {var $thumb = $thumbGen->create($file['filePath'], 60, 60)}
+                                    <img class="rounded-circle"
+                                         alt="{$file['description'] ?: $item['title']}"
+                                         src="{$thumb->getSrc()}"
+                                         width="{$thumb->getWidth()}"
+                                         height="{$thumb->getHeight()}"
+                                    >
+                                {/if}
+                                <div class="ms-3 small" n:if="$item['email'] || $item['phone']">
+                                    <a n:if="$item['email']" href="mailto:{$item['email']}" target="_blank" class="d-block mb-1">{$item['email']}</a>
+                                    <a n:if="$item['phone']" href="tel:{$item['phone']|trim:' '}" target="_blank" class="d-block">{$item['phone']}</a>
                                 </div>
                             </div>
                         {/foreach}
