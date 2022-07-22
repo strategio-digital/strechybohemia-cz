@@ -3,7 +3,7 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-{varType array $data}
+{varType Strategio\Model\RevisionDataset $revisions}
 
 {define item array $item, string $color}
     <div class="d-flex align-items-center align-items-lg-start">
@@ -27,7 +27,7 @@
 <div class="container">
     <h2 class="h1 mb-5 fw-bold text-white text-center">Balíčky revizních kontrol</h2>
     <div class="row">
-        <div class="col-md-6 col-xl-3 mt-4" n:foreach="$data['packages'] as $packageName => $package">
+        <div class="col-md-6 col-xl-3 mt-4" n:foreach="$revisions->getPackages() as $packageName => $package">
             {var $class = $iterator->getCounter() === 3 ? 'shadow-lg'}
             {var $style = $iterator->getCounter() !== 3 ? 'border: 3px solid #fff' : 'border: 3px solid ##dc3545'}
             <div class="p-4 bg-white rounded-3 {$class}" style="{$style}">
@@ -47,7 +47,7 @@
 
                 <div class="my-4" style="min-height: 460px">
                     <ul class="list-unstyled">
-                        <li n:foreach="$data['common_items'] as $item" class="small mt-2">
+                        <li n:foreach="$revisions->getCommonItems() as $item" class="small mt-2">
                             {include item item: $item, color: 'text-dark'}
                         </li>
                         <li n:foreach="$package['items'] as $item" class="small {if $iterator->isFirst()}mt-4{else}mt-2{/if}">

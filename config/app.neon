@@ -5,3 +5,4 @@ services:
     - Strategio\Model\MembersDataset
     - Strategio\Model\FaqDataset
     - Strategio\Model\TestimonialDataset
+    - Strategio\Model\RevisionDataset

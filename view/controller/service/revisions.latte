@@ -5,6 +5,7 @@
 
 {varType Strategio\Controller\ServiceController $controller}
 {varType ContentioSdk\Component\AssetLoader $assets}
+{varType Strategio\Model\RevisionDataset $revisions}
 {varType array $_ENV}
 
 {extends './../../@layout.latte'}
@@ -28,7 +29,7 @@
     <section class="py-5 py-md-7" style="background-color: rgba(229,76,76,0.9);" id="objednavka">
         <div class="container"
              id="checkout-with-map"
-             data-buying-packages="true"
+             data-packages="{\Nette\Utils\Json::encode($revisions->getPackages())}"
              data-return-url="{$controller->request->getUri()}?thanks=true"
              data-terms-and-conditions-path="{$controller->link('article_detail', ['label' => 'pravo', 'slug' => 'obchodni-podminky'])}"
              data-terms-personal-data-path="{$controller->link('article_detail', ['label' => 'pravo', 'slug' => 'zpracovani-osobnich-udaju'])}"

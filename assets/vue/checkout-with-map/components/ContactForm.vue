@@ -66,7 +66,6 @@
 <script type="ts">
 import {defineComponent} from "vue";
 import {isEmail, isPhone} from "../../../typescript/Helpers/Validator";
-import Axios from "../../../typescript/Plugins/OldApiAxios";
 
 export default defineComponent({
   props: ['phone', 'email', 'package', 'address', 'resetHandler', 'submitHandler', 'ui', 'fullPrice'],
@@ -78,13 +77,11 @@ export default defineComponent({
   ],
   async beforeMount() {
     if (this.ui.buyingPackage) {
-      const res = await Axios().post('service/packages');
-
-      this.packages = Object.keys(res.data.packages).map(key => {
+      this.packages = Object.keys(this.ui.packages).map(key => {
         return {
           key: key,
-          price: res.data.packages[key].price,
-          name: res.data.packages[key].name
+          price: this.ui.packages[key].price,
+          name: this.ui.packages[key].name
         }
       }).filter((value => value.price !== null));
 

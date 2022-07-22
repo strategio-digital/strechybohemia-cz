@@ -99,7 +99,7 @@ import ThankYou from "./components/ThankYou.vue";
 import {smoothScroll} from "../../typescript/Plugins/SmoothScroll";
 
 export default defineComponent({
-  props: ['buyingPackages', 'returnUrl', 'termsAndConditionsPath', 'termsPersonalDataPath', 'mapPdfPath'],
+  props: ['returnUrl', 'termsAndConditionsPath', 'termsPersonalDataPath', 'mapPdfPath', 'packages'],
   components: {
     ThankYou,
     PaymentForm,
@@ -157,6 +157,7 @@ export default defineComponent({
     return {
       ui: {
         buyingPackage: false,
+        packages: null,
         returnUrl: null,
         termsAndConditionsPath: null,
         termsPersonalDataPath: null,
@@ -201,7 +202,8 @@ export default defineComponent({
   },
 
   beforeMount() {
-    this.ui.buyingPackage = this.buyingPackages === 'true';
+    this.ui.buyingPackage = this.packages !== undefined;
+    this.ui.packages = this.ui.buyingPackage ? JSON.parse(this.packages) : null;
     this.ui.returnUrl = this.returnUrl;
     this.ui.termsAndConditionsPath = this.termsAndConditionsPath;
     this.ui.termsPersonalDataPath = this.termsPersonalDataPath;
