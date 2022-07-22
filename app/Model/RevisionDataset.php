@@ -59,6 +59,7 @@ class RevisionDataset
     {
         return [
             'mini' => [
+                // Při úpravě klíče, názvu nebo ceny je potřeba hodnoty upravit i v app.strechybohemia.cz
                 'name' => 'Mini',
                 'price' => 3000,
                 'evidencePrice' => 3000,
@@ -70,6 +71,7 @@ class RevisionDataset
                 'label' => null
             ],
             'standard' => [
+                // Při úpravě klíče, názvu nebo ceny je potřeba hodnoty upravit i v app.strechybohemia.cz
                 'name' => 'Standard',
                 'price' => 5500,
                 'evidencePrice' => 2750,
@@ -81,6 +83,7 @@ class RevisionDataset
                 'label' => 'Vhodný pro plnění záruky a podmínek pojišťoven.'
             ],
             'profi' => [
+                // Při úpravě klíče, názvu nebo ceny je potřeba hodnoty upravit i v app.strechybohemia.cz
                 'name' => 'Profi',
                 'price' => 15000,
                 'evidencePrice' => 2500,
