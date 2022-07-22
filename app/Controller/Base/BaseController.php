@@ -12,7 +12,9 @@ use ContentioSdk\Component\StdTemplate;
 use ContentioSdk\Component\Thumbnail\ThumbGen;
 use ContentioSdk\Debugger\ApiDebugger;
 use Latte\Engine;
+use Strategio\Helper\NavbarHelper;
 use Strategio\Model\ContactDataset;
+use Strategio\Model\NavbarDataset;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -30,6 +32,7 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
         public Request           $request,
         
         protected ContactDataset $contactDataset,
+        protected NavbarDataset $navbarDataset,
     )
     {
     }
@@ -38,6 +41,7 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
     {
         parent::startup();
         
+        $this->template->navbar = NavbarHelper::activate($this->navbarDataset->get(), $this->request);
         $this->template->contacts = $this->contactDataset;
     }
 }

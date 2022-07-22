@@ -6,7 +6,7 @@
 .logo {
     height: 60px;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
         height: 40px;
     }
 }

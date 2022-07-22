@@ -5,80 +5,56 @@
 
 {varType ContentioSdk\Component\AssetLoader $assets}
 {varType Strategio\Controller\Base\BaseController $controller}
+{varType array $navbar}
 
-<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top" id="core-navbar">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow fixed-top" id="core-navbar">
     <div class="container">
-        <a class="navbar-brand me-5" href="{$controller->link('home')}">
+
+        <a class="navbar-brand me-4" href="{$controller->link('home')}">
             <img src="{$assets->get('/img/logo-red-big.svg')}" alt="Střechy Bohemia" class="logo">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            <span class="d-block d-md-none" style="font-size: .7rem">menu</span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbar-toggler">
             <ul class="navbar-nav ms-auto text-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="{$controller->link('home')}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill d-none d-lg-inline mb-1" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-                        </svg>
-                        <span class="d-inline d-lg-none ms-2">Úvod</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="nav-services" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Služby
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="nav-services">
-                        <li><a class="dropdown-item" href="{$controller->link('service_emergency')}">Pohotovostní servis 24/7</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('service_revisions')}">Pravidelné kontroly a revize</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'rekonstrukce-sikmych-a-plochych-strech'])}">Rekonstrukce šikmých a plochých střech</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'realizace-novych-strech'])}">Realizace nových střech</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'klempirske-prace'])}">Klempířské práce</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'pokryvacske-prace'])}">Pokrývačské práce</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'tesarske-prace'])}">Tesařské práce</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'tepelna-izolace-fasad'])}">Tepelná izolace fasád</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'izolace-plochych-strech'])}">Izolace plochých střech</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'sluzby', 'slug' => 'lokalizace-netesnosti-a-zatekani'])}">Lokalizace netěsností a zatékání</a></li>
-                    </ul>
-                </li>
-                {* TODO: *}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reference</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="nav-services" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Typy sřech
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="nav-services">
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'plocha-pultova-strecha'])}">Plochá pultová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'sikma-pultova-strecha'])}">Šikmá pultová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'stanova-strecha'])}">Stanová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'sedlova-strecha'])}">Sedlová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'mansardova-strecha'])}">Mansardová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'polovalbova-strecha'])}">Polovalbová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'valbova-strecha'])}">Valbová střecha</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'strechy', 'slug' => 'zelena-strecha'])}">Zelená střecha</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="nav-services" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        O nás
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="nav-services">
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'o-nas', 'slug' => 'proc-zvolit-nas'])}">Proč zvolit nás</a></li>
-                        <li><a class="dropdown-item" href="{$controller->link('article_detail', ['label' => 'o-nas', 'slug' => 'nase-certifikace'])}">Naše certifikace</a></li>
-                    </ul>
-                </li>
-                {* TODO: *}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kariéra</a>
-                </li>
-                <li class="nav-item ms-2">
-                    <a href="{$controller->link('contact')}" class="btn btn-outline-danger">Kontakty</a>
-                </li>
+                {foreach $navbar as $item}
+                    {if $item['dropdown']}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {$item['active'] ? 'active'}" href="{$item['link']}" id="nav-{$item['name']|webalize}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {$item['name']}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="nav-{$item['name']|webalize}">
+                                {foreach $item['dropdown'] as $subItem}
+                                    {if !$subItem['link'] && !$subItem['name']}
+                                        <li><hr class="dropdown-divider"></li>
+                                    {else}
+                                        <li><a class="dropdown-item {$subItem['active'] ? 'active'}" href="{$subItem['link']}">{$subItem['name']}</a></li>
+                                    {/if}
+                                {/foreach}
+                            </ul>
+                        </li>
+                    {else}
+                        <li class="nav-item">
+                            {if $iterator->isFirst()}
+                                <a class="nav-link {$item['active'] ? 'active'}" href="{$item['link']}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill d-none d-md-inline mb-1" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                                    </svg>
+                                    <span class="d-inline d-md-none ms-2">{$item['name']}</span>
+                                </a>
+                            {elseif $iterator->isLast()}
+                                <a href="{$item['link']}" class="btn btn-outline-danger {$item['active'] ? 'fw-bold'}">{$item['name']}</a>
+                            {else}
+                                <a class="nav-link {$item['active'] ? 'active'}" href="{$item['link']}">{$item['name']}</a>
+                            {/if}
+                        </li>
+                    {/if}
+                {/foreach}
             </ul>
         </div>
     </div>

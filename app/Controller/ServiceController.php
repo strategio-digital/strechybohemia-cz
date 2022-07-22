@@ -17,6 +17,7 @@ use Strategio\Controller\Base\BaseController;
 use Strategio\Model\ContactDataset;
 use Strategio\Model\FaqDataset;
 use Strategio\Model\MembersDataset;
+use Strategio\Model\NavbarDataset;
 use Strategio\Model\RevisionDataset;
 use Strategio\Model\TestimonialDataset;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +27,8 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 class ServiceController extends BaseController
 {
     public function __construct(
-        protected Engine         $latte,
-        protected ApiDebugger    $apiDebugger,
+        protected Engine             $latte,
+        protected ApiDebugger        $apiDebugger,
         protected Response           $response,
         protected AssetLoader        $assetLoader,
         protected ThumbGen           $thumbGen,
@@ -36,7 +37,8 @@ class ServiceController extends BaseController
         public Request               $request,
         
         protected ContactDataset     $contactDataset,
-
+        protected NavbarDataset      $navbarDataset,
+        
         protected TestimonialDataset $testimonialDataset,
         protected RevisionDataset    $revisionDataset,
         protected MembersDataset     $membersDataset,
