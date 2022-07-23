@@ -17,6 +17,8 @@ import {hideMenuOnScroll} from "./Plugins/SmoothScroll";
 
 import {createApp} from "vue";
 import CheckoutWithMap from "../vue/checkout-with-map/CheckoutWithMap.vue";
+import CarrerJobs from "./Components/CarrerJobs";
+import CarrerForm from "./Components/CarrerForm";
 
 (async () => {
     CookieConsent();
@@ -26,6 +28,9 @@ import CheckoutWithMap from "../vue/checkout-with-map/CheckoutWithMap.vue";
 
     // Init Bootstrap
     Bootstrap();
+
+    // Career jobs
+    CarrerJobs();
 
     // Light gallery
     const galleryContainer = document.querySelector('[data-gallery-container]');
@@ -116,6 +121,36 @@ import CheckoutWithMap from "../vue/checkout-with-map/CheckoutWithMap.vue";
             ],
         }
     ]);
+
+    CarrerForm(FormValidator({
+        ...settings,
+        errorClasses: 'is-invalid',
+        neutralClasses: 'is-neutral',
+        alertSuccessBg: 'bg-success text-white fw-bold mb-3 p-3 rounded-3 text-start',
+        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start',
+    }), document.getElementById('careerForm') as HTMLFormElement, [
+        {
+            name: 'phone',
+            rules: [
+                {type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: {min: 9}},
+                {type: 'phone', message: 'Telefon musí být v platném formátu.'},
+                {type: 'required', message: 'Telefon je povinný.'},
+            ],
+        },
+        {
+            name: 'salary',
+            rules: [
+                {type: 'required', message: 'Plat je povinný.'},
+            ],
+        },
+        {
+            name: 'jobName',
+            rules: [
+                {type: 'required', message: 'Pozice je povinná.'},
+            ],
+        },
+    ])
+
 
     // Google map
     if (document.getElementById('google-map-contacts')) {

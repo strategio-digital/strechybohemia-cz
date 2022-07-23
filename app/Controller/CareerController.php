@@ -4,6 +4,7 @@ namespace Strategio\Controller;
 
 use ContentioSdk\Attribute\Template;
 use Strategio\Controller\Base\BaseController;
+use Strategio\Helper\CareerHelper;
 use Symfony\Component\HttpFoundation\Response;
 
 class CareerController extends BaseController
@@ -25,14 +26,35 @@ class CareerController extends BaseController
             ]
         ]);
     
-        $responses = $this->dispatchRequests('Career');
-        $response = $responses['article'];
-        $contents = $response->getBody()->getContents();
+        $this->addRequest('jobs', 'POST', "article/show-all", [
+            'json' => [
+                'currentPage' => 1,
+                'itemsPerPage' => 100,
+                'desc' => false,
+                'labels' => ['pracovni-pozice'],
+                'suppressLabels' => true,
+                'suppressFiles' => true,
+                'suppressParagraphs' => true,
+                'suppressParagraphFiles' => true,
+            ]
+        ]);
     
-        if ($response->getStatusCode() !== Response::HTTP_OK) {
-            $this->renderError($response, $contents);
+        $responses = $this->dispatchRequests('Career');
+        
+        $articleContents = $responses['article']->getBody()->getContents();
+        if ($responses['article']->getStatusCode() !== Response::HTTP_OK) {
+            $this->renderError($responses['article'], $articleContents);
         }
-
-        $this->template->data = json_decode($contents, true);
+    
+        $jobData = [];
+        if ($responses['jobs']->getStatusCode() === Response::HTTP_OK) {
+            $jobData = json_decode($responses['jobs']->getBody()->getContents(), true);
+        }
+    
+        $this->template->data = json_decode($articleContents, true);
+        
+        $this->template->jobData = $jobData;
+        $this->template->jobSalaries = CareerHelper::getSalaries($jobData['items']);
+        $this->template->jobShortNames = CareerHelper::getShortJobNames($jobData['items']);
     }
 }

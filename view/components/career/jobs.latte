@@ -3,17 +3,20 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-{var $positions = ['Výpomoc na stavbě', 'Účetní', 'Skladník', 'Lídr realizačního týmu', 'Začátečník klempíř', 'x', 'y', 'x', 'y', 'x', 'y', 'x', 'y', 'x', 'y', 'x', 'y', 'x', 'y']}
-<div class="bg-white p-4 rounded-2 shadow-sm mb-3" n:foreach="$positions as $position">
-    <div class="row d-flex justify-content-between align-items-center">
-        <div class="col-9 col-lg-6 order-0">
-            <h3 class="h6 m-0 p-0 lh-base">{$iterator->getCounter()}. <span class="fw-bolder">{$position}</span></h3>
-        </div>
-        <div class="col-lg-4 order-2 order-lg-1">
-            Mzda: <span class="fw-bold">30 000 Kč</span>
-        </div>
-        <div class="col-3 col-lg-2 order-1 order-lg-2 text-end">
-            <a href="#volne-pozice" class="btn btn-sm btn-outline-danger">Zvolit</a>
+{varType array $jobData}
+
+{foreach $jobData['items'] as $item}
+    <div class="bg-white p-4 rounded-2 shadow-sm mb-3" data-job="true" data-salary="{(int)$item['descriptionExtra']}" data-job-name="{$item['descriptionShort']}" data-job-full-name="{$item['title']}">
+        <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-9 col-lg-6 order-0">
+                <h3 class="h6 m-0 p-0 lh-base fw-bolder">{$item['title']}</h3>
+            </div>
+            <div class="col-lg-4 order-2 order-lg-1">
+                Mzda: <span class="fw-bold">{(int)$item['descriptionExtra']|number: 0, '', ' '} Kč</span>
+            </div>
+            <div class="col-3 col-lg-2 order-1 order-lg-2 text-end">
+                <a href="#volne-pozice" class="btn btn-sm btn-outline-danger" data-set-job="true">Zvolit</a>
+            </div>
         </div>
     </div>
-</div>
+{/foreach}

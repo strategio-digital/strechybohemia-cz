@@ -15,7 +15,6 @@ const hideMenuOnScroll = () => {
         const btn = document.getElementsByClassName('navbar-toggler')[0] as HTMLDivElement;
 
         if (btn.getAttribute('aria-expanded') === 'true' && window.innerWidth <= 991) {
-            console.log('yep');
             const collapse = Collapse.getOrCreateInstance(toggler) as Collapse;
             collapse.hide();
         }
