@@ -18,7 +18,7 @@ class CareerController extends BaseController
                 'labels' => [],
                 'suppressLabels' => true,
                 'suppressFiles' => false,
-                'suppressParagraphs' => true,
+                'suppressParagraphs' => false,
                 'suppressParagraphFiles' => true,
                 'suppressPrevNext' => true,
                 'suppressPrevNextFiles' => true,

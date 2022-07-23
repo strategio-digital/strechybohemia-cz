@@ -3,6 +3,8 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
+{varType array $data}
+
 <div class="bg-light py-5 py-md-7">
     <div class="container">
         <h2 class="h1 text-center">Benefity, bez toho by to přece nešlo</h2>
@@ -27,13 +29,17 @@
                 </p>
             </div>
         </div>
-
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" n:foreach="$data['item']['paragraphs'] as $paragraph">
             <div class="col-lg-8 mt-7">
-                <div class="shadow rounded-3 overflow-hidden">
+                <div class="shadow rounded-3 overflow-hidden" n:if="$paragraph['videoLink']">
                     <div class="ratio ratio-16x9">
-                        <iframe src="https://www.youtube-nocookie.com/embed/cMAILs5nPuY" title="YouTube video" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube-nocookie.com/embed/{$paragraph['videoLink']|replace:'https://youtu.be/'}" title="{$paragraph['title']}" allowfullscreen></iframe>
                     </div>
+                </div>
+
+                <div class="mt-5 text-center" n:if="$paragraph['title'] || $paragraph['description']">
+                    <h3 n:if="$paragraph['title']">{$paragraph['title']}</h3>
+                    <div n:if="$paragraph['description']">{$paragraph['description']|noescape}</div>
                 </div>
             </div>
         </div>

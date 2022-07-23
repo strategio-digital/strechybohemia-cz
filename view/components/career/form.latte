@@ -3,13 +3,14 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
+{varType array $data}
 {varType array $jobSalaries}
 {varType array $jobShortNames}
 
-<div class="shadow rounded-3">
-    <div class="rounded-top rounded-top-3 overflow-hidden mt-4 mt-md-0">
+<div class="shadow rounded-3 mt-md-0">
+    <div class="rounded-top rounded-top-3 overflow-hidden" n:if="$data['item']['videoLink']">
         <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube-nocookie.com/embed/DdW1OaP4tHc" title="YouTube video" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/{$data['item']['videoLink']|replace:'https://youtu.be/'}" title="{$data['item']['title']}" allowfullscreen></iframe>
         </div>
     </div>
     <form id="careerForm" class="rounded-3 rounded-bottom-3 p-4 p-lg-5 bg-white mb-5 mb-md-0 ">
