@@ -15,6 +15,7 @@ use Latte\Engine;
 use Strategio\Helper\NavbarHelper;
 use Strategio\Model\ContactDataset;
 use Strategio\Model\NavbarDataset;
+use Strategio\Model\WhyUsDataset;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -32,7 +33,8 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
         public Request           $request,
         
         protected ContactDataset $contactDataset,
-        protected NavbarDataset $navbarDataset,
+        protected NavbarDataset  $navbarDataset,
+        protected WhyUsDataset   $whyUsDataset
     )
     {
     }
@@ -43,5 +45,6 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
         
         $this->template->navbar = NavbarHelper::activate($this->navbarDataset->get(), $this->request);
         $this->template->contacts = $this->contactDataset;
+        $this->template->whyUs = $this->whyUsDataset;
     }
 }

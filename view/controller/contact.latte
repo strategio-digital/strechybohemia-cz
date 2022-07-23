@@ -3,6 +3,8 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
+{varType ContentioSdk\Component\AssetLoader $assets}
+
 {extends './../@layout.latte'}
 
 {block head}
@@ -12,7 +14,7 @@
 {/block}
 
 {block content}
-    <section class="py-5 py-sm-7" style="background-color: rgba(225,56,56,0.9);">
+    <header class="py-5 py-sm-7" style="background-color: rgba(225,56,56,0.9); background-image: url({$assets->get('/img/section-bg.png')});">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-md-5 col-md-5 text-white">
@@ -23,7 +25,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
     <section class="bg-white">
         <div class="container text-center mt-5 mt-sm-7">

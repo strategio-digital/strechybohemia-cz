@@ -12,6 +12,7 @@ use Strategio\Controller\CareerController;
 use Strategio\Controller\ContactController;
 use Strategio\Controller\HomeController;
 use Strategio\Controller\ArticleController;
+use Strategio\Controller\ReferenceController;
 use Strategio\Controller\ServiceController;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
@@ -23,10 +24,16 @@ class RouterFactory extends BaseRouter
         
         $this->add('home', '/', [HomeController::class, 'index']);
         $this->add('contact', '/kontakt', [ContactController::class, 'index']);
+        $this->add('career', '/kariera', [CareerController::class, 'index']);
+        
         $this->add('service_emergency', '/opravy-a-servis-strech-24-7', [ServiceController::class, 'emergency']);
         $this->add('service_revisions', '/pravidelne-revize-a-kontroly-strech', [ServiceController::class, 'revisions']);
+    
+        $this->add('reference_list_home', '/reference', [ReferenceController::class, 'index']);
+        $this->add('reference_list', '/reference/strana/{page<\d+>}', [ReferenceController::class, 'index']);
+        $this->add('reference_detail', '/reference/{slug}', [ReferenceController::class, 'detail']);
+    
         $this->add('article_detail', '/{label}/{slug}', [ArticleController::class, 'index']);
-        $this->add('career', '/kariera', [CareerController::class, 'index']);
         
         return $routes;
     }

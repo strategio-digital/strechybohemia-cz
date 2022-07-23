@@ -1,0 +1,57 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+{varType Strategio\Controller\ReferenceController $controller}
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $data}
+
+<section class="position-relative bg-white py-5 py-md-7">
+    <div class="position-absolute w-100 top-0 pt-10 pt-sm-8 pt-md-10" style="background-color: rgba(225,56,56,0.9); background-image: url({$assets->get('/img/section-bg.png')});">&nbsp;</div>
+
+    <div class="container position-relative">
+        <div class="row g-xl-5">
+            <div class="col-sm-6 col-lg-4" n:foreach="$data['items'] as $item">
+                <div class="bg-light p-4">
+                    {var $file = current(array_filter($item['files'], fn(array $file) => $file['cover'] === true))}
+                    {if $item['videoLink']}
+                        <div class="ratio ratio-4x3">
+                            <iframe src="https://www.youtube-nocookie.com/embed/DdW1OaP4tHc" title="" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    {elseif $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                        {var $thumb = $thumbGen->create($file['filePath'], 520, 390)}
+                        <a href="{$controller->link('reference_detail', ['slug' => $item['slug']])}">
+                            <img class="img-fluid" alt="{$item['title']}" src="{$thumb->getSrc()}" width="{$thumb->getWidth()}" height="{$thumb->getHeight()}" loading="lazy">
+                        </a>
+                    {else}
+                        <a href="{$controller->link('reference_detail', ['slug' => $item['slug']])}">
+                            <img src="https://dummyimage.com/520x390" alt="{$item['title']}" class="img-fluid" width="520" height="390" loading="lazy">
+                        </a>
+                    {/if}
+                </div>
+
+                <div class="p-4">
+                    <a href="{$controller->link('reference_detail', ['slug' => $item['slug']])}" class="text-decoration-none link-dark">
+                        <h2 class="h5 mb-3">{$item['title']}</h2>
+                        {if $item['descriptionExtra']}
+                            <p class="text-secondary">„{$item['descriptionExtra']}“</p>
+                        {else}
+                            <p class="text-secondary">{$item['descriptionShort']}</p>
+                        {/if}
+                    </a>
+
+                    <a href="{$controller->link('reference_detail', ['slug' => $item['slug']])}">
+                        <span>Přečíst více</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {include './../paginator.latte', routeName: 'reference_list', data: $data}
+    </div>
+</section>

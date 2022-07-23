@@ -19,6 +19,7 @@ use Strategio\Model\FaqDataset;
 use Strategio\Model\NavbarDataset;
 use Strategio\Model\RevisionDataset;
 use Strategio\Model\TestimonialDataset;
+use Strategio\Model\WhyUsDataset;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -37,6 +38,7 @@ class ServiceController extends BaseController
         
         protected ContactDataset     $contactDataset,
         protected NavbarDataset      $navbarDataset,
+        protected WhyUsDataset       $whyUsDataset,
         
         protected TestimonialDataset $testimonialDataset,
         protected RevisionDataset    $revisionDataset,
@@ -48,7 +50,7 @@ class ServiceController extends BaseController
     public function startup(): void
     {
         parent::startup();
-    
+        
         $this->addRequest('contact_members', 'POST', "article/show-all", [
             'json' => [
                 'currentPage' => 1,
@@ -61,15 +63,15 @@ class ServiceController extends BaseController
                 'suppressParagraphFiles' => true,
             ]
         ]);
-    
+        
         $responses = $this->dispatchRequests('Contact/Member List');
         $response = $responses['contact_members'];
         $contents = $response->getBody()->getContents();
-    
+        
         if ($response->getStatusCode() !== Response::HTTP_OK) {
             $this->renderError($response, $contents);
         }
-    
+        
         $this->template->data = json_decode($contents, true);
         $this->template->testimonials = $this->testimonialDataset;
         $this->template->faq = $this->faqDataset;

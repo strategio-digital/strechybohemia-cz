@@ -1,0 +1,18 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{extends './../@layout.latte'}
+
+{block head}
+    <title>Reference | Střechy Bohemia</title>
+    <meta name="description" content="Provedené realizace, opravy i">
+    {include parent}
+{/block}
+
+{block content}
+    {include './../components/reference/header.latte'}
+    {include './../components/reference/list.latte'}
+    {include './../components/page-footer-cta.latte'}
+{/block}

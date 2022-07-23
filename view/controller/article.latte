@@ -3,7 +3,9 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
+{varType ContentioSdk\Component\AssetLoader $assets}
 {varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+
 {varType array $data}
 {varType string $label}
 
@@ -23,7 +25,7 @@
 {/block}
 
 {block content}
-    <header class="py-5 py-md-8" style="background-color: rgba(225,56,56,0.9);">
+    <header class="py-5 py-md-8" style="background-color: rgba(225,56,56,0.9); background-image: url({$assets->get('/img/section-bg.png')});">
         <div class="container text-white">
             {if $label === 'strechy' && $cover}
                 <div class="d-flex justify-content-between align-items-center header-article">
@@ -46,11 +48,15 @@
 
     <section class="py-5 py-md-7">
         <div class="container">
-            <div n:if="$data['item']['description']" class="mb-3">
+            <div n:if="$data['item']['description']">
                 {$data['item']['description']|noescape}
             </div>
 
-            {include './../components/article/gallery.latte'}
+            {if count($data['item']['files'])}
+                <div n:class="$data['item']['description'] ? 'mt-4'">
+                    {include './../components/article/gallery.latte'}
+                </div>
+            {/if}
         </div>
     </section>
 {/block}

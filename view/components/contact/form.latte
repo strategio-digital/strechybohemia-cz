@@ -3,7 +3,9 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
-<form id="contactForm" class="shadow-lg rounded-3 p-4 p-lg-5 mt-4 mt-md-0 bg-light">
+{varType string $color}
+
+<form id="contactForm" class="shadow-lg rounded-3 p-4 p-lg-5 mt-4 mt-md-0 {ifset $color}{$color}{else}bg-light{/ifset}">
     <h2 class="h3 mb-4 fw-bold">Poptávkový formulář</h2>
     <div class="form-floating mb-3" data-v-group>
         <input name="name" id="name" type="text" class="form-control" placeholder="Zadejte jméno a příjmení">

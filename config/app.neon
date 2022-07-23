@@ -6,3 +6,4 @@ services:
     - Strategio\Model\FaqDataset
     - Strategio\Model\TestimonialDataset
     - Strategio\Model\RevisionDataset
+    - Strategio\Model\WhyUsDataset

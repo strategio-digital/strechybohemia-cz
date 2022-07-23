@@ -16,6 +16,7 @@ use Latte\Engine;
 use Strategio\Controller\Base\BaseController;
 use Strategio\Model\ContactDataset;
 use Strategio\Model\NavbarDataset;
+use Strategio\Model\WhyUsDataset;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -31,9 +32,10 @@ class ContactController extends BaseController
         protected UrlGenerator   $urlGenerator,
         protected StdTemplate    $template,
         public Request           $request,
-
+        
         protected ContactDataset $contactDataset,
-        protected NavbarDataset $navbarDataset,
+        protected NavbarDataset  $navbarDataset,
+        protected WhyUsDataset   $whyUsDataset
     )
     {
     }
@@ -53,15 +55,15 @@ class ContactController extends BaseController
                 'suppressParagraphFiles' => true,
             ]
         ]);
-    
+        
         $responses = $this->dispatchRequests('Contact/Member List');
         $response = $responses['contact_members'];
         $contents = $response->getBody()->getContents();
-    
+        
         if ($response->getStatusCode() !== Response::HTTP_OK) {
             $this->renderError($response, $contents);
         }
-    
+        
         $this->template->data = json_decode($contents, true);
     }
 }

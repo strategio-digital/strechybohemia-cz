@@ -33,7 +33,7 @@ class NavbarDataset
                         'active' => false,
                     ],
                     [
-                        'name' => 'Pravidelné kontroly a revize',
+                        'name' => 'Pravidelné revize a kontroly',
                         'link' => $this->generator->generate('service_revisions'),
                         'active' => false,
                     ],
@@ -91,7 +91,7 @@ class NavbarDataset
             ],
             [
                 'name' => 'Reference',
-                'link' => '#',
+                'link' => $this->generator->generate('reference_list', ['page' => 1]),
                 'active' => false,
                 'dropdown' => null,
             ],

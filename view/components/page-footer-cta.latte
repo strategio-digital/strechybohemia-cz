@@ -1,0 +1,39 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType Strategio\Model\WhyUsDataset $whyUs}
+
+<div class="py-5 py-md-7 bg-light">
+    <div class="container">
+        <div class="text-md-center mb-md-7">
+            <h2 class="display-5 fw-bold text-danger">Máte zájem o střechu, <br>která přežije celé generace?</h2>
+            <p class="lead my-4">Potřebujete znát další důvody, proč si zvolit právě nás? Klidně se <br class="d-none d-md-block d-xl-none">zeptejte přes poptávkový formulář.</p>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-lg-6 co-xl-4 col-xxl-6">
+                <div class="row gy-4 gy-lg-5">
+                    <div class="col-lg-12" n:foreach="$whyUs->get() as $item">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div class="bg-white shadow-sm text-dark rounded-circle d-flex justify-content-center align-items-center me-4" style="width: 70px; height: 70px">
+                                    <div class="h3 mb-0 fw-bold">{$iterator->getCounter()}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="h6 fw-bold mb-1">{$item['title']}</h3>
+                                <p class="mb-0">{$item['description']}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-5 offset-xl-1 mt-5 mt-lg-0">
+                {include './contact/form.latte', color: 'bg-white'}
+            </div>
+        </div>
+    </div>
+</div>
