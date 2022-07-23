@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace Strategio\Router;
 
 use ContentioSdk\Router\BaseRouter;
+use Strategio\Controller\CareerController;
 use Strategio\Controller\ContactController;
 use Strategio\Controller\HomeController;
 use Strategio\Controller\ArticleController;
@@ -25,6 +26,7 @@ class RouterFactory extends BaseRouter
         $this->add('service_emergency', '/opravy-a-servis-strech-24-7', [ServiceController::class, 'emergency']);
         $this->add('service_revisions', '/pravidelne-revize-a-kontroly-strech', [ServiceController::class, 'revisions']);
         $this->add('article_detail', '/{label}/{slug}', [ArticleController::class, 'index']);
+        $this->add('career', '/kariera', [CareerController::class, 'index']);
         
         return $routes;
     }

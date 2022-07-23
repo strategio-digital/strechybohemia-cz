@@ -3,6 +3,7 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  *}
 
+{varType ContentioSdk\Controller\ContactController $controller}
 {varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
 {varType array $data}
 
@@ -32,5 +33,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-4">
+            <div class="rounded-3 text-center bg-light py-5 h-100 d-flex flex-column justify-content-center">
+                <div>
+                    <div class="d-inline-flex justify-content-center align-items-center rounded-circle border border-4 border-white my-4" style="width: 140px; height: 140px; background-color: #eee">
+                       <span class="display-4 fw-bold">?</span>
+                    </div>
+                    <h2 class="h5 fw-bold mb-1">Přidej se k nám</h2>
+                    <p class="mb-0">Máme pozici i pro tebe</p>
+                </div>
+                <div class="mt-5">
+                    <a href="{$controller->link('career')}" class="btn btn-outline-secondary btn-sm">Zhlédnout volné pozice</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -1,0 +1,53 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+<div class="shadow rounded-3">
+    <div class="rounded-top rounded-top-3 overflow-hidden mt-4 mt-md-0">
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube-nocookie.com/embed/DdW1OaP4tHc" title="YouTube video" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="rounded-3 rounded-bottom-3 p-4 p-lg-5 bg-white mb-5 mb-md-0 ">
+        <h2 class="h3 mb-4 fw-bold">Žádost o práci</h2>
+        <div class="form-floating mb-3">
+            <select name="salary" id="salary" class="form-select">
+                <option selected>25 000 Kč (minimálně)</option>
+                <option value="1">30 000 Kč (minimálně)</option>
+                <option value="2">45 000 Kč (minimálně)</option>
+                <option value="3">65 000 Kč (minimálně)</option>
+            </select>
+            <label for="salary"><span class="text-danger">*</span> Zvol požadovaný plat</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select name="job" id="jobName" class="form-select">
+                <option value="0" selected>Na pozici mi nezáleží</option>
+                <option value="3">Klempíř</option>
+                <option value="5">Pokrývač</option>
+                <option value="4">Tesař</option>
+                <option value="6">Zedník</option>
+                <option value="7">Skladník</option>
+                <option value="8">Izolatér</option>
+                <option value="1">Vedoucí realizačního týmu</option>
+                <option value="1">Výpomoc na stavbě</option>
+                <option value="2">Účetní</option>
+            </select>
+            <label for="jobName"><span class="text-danger">*</span> Vyber pozice</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input name="phone" id="phone" type="text" class="form-control" placeholder="Zadejte telefon">
+            <label for="phone">
+                <span class="text-danger">*</span> Zadej telefon
+            </label>
+        </div>
+
+        <input type="hidden" name="jobFullName" value="x">
+
+        <button class="btn-warning shadow btn btn-lg w-100 py-3 fw-bold" type="submit">
+            <span class="fs-6">Odeslat žádost o práci</span>
+        </button>
+    </div>
+</div>

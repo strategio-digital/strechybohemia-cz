@@ -1,0 +1,30 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $data}
+{varType array|null $cover}
+
+w
+    {if $cover}
+        <div class="position-absolute top-0 start-0 end-0 bottom-0">
+            {var $thumbCover = $thumbGen->create($cover['filePath'], 1540, null, 'SHRINK_ONLY')}
+            <img class="w-100 h-100"
+                 style="object-fit: cover; object-position: top; opacity: .2"
+                 alt="{$cover['description']}"
+                 src="{$thumbCover->getSrc()}"
+                 width="{$thumbCover->getWidth()}"
+                 height="{$thumbCover->getHeight()}"
+            >
+        </div>
+    {/if}
+    <div class="container text-center position-relative">
+        <div class="py-5 py-md-10">
+            <p class="h2 fw-bold text-white text-uppercase">Nedři se</p>
+            <h1 class="display-3 text-uppercase fw-bold mb-0 text-white">Přidej se k nám</h1>
+            <p class="h4 d-inline-block mt-3 fw-bold text-light" style="max-width: 600px" n:if="$data['item']['descriptionShort']">{$data['item']['descriptionShort']}</p>
+        </div>
+    </div>
+</header>

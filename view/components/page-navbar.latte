@@ -48,7 +48,7 @@
                                     <span class="d-inline d-md-none ms-2">{$item['name']}</span>
                                 </a>
                             {elseif $iterator->isLast()}
-                                <a href="{$item['link']}" class="btn btn-outline-danger {$item['active'] ? 'fw-bold'}">{$item['name']}</a>
+                                <a href="{$item['link']}" class="btn btn-outline-danger ms-2 {$item['active'] ? 'fw-bold'}">{$item['name']}</a>
                             {else}
                                 <a class="nav-link {$item['active'] ? 'active'}" href="{$item['link']}">{$item['name']}</a>
                             {/if}

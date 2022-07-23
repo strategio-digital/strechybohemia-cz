@@ -1,0 +1,24 @@
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $files}
+
+{if count($files)}
+    <div class="row g-4" data-gallery-container>
+        {foreach $files as $file}
+            {var $thumbBig = $thumbGen->create($file['filePath'], 1440, null, 'SHRINK_ONLY')}
+            {var $thumbSmall = $thumbGen->create($file['filePath'], 400, 300)}
+
+            <a href="{$thumbBig->getSrc()}" class="col-6 col-sm-4 col-lg-3" title="{$file['description'] ?: ' '}">
+                <div class="d-block bg-light p-3 border">
+                    <img id="{$file['name']|webalize}"
+                         alt="{$file['description']}"
+                         src="{$thumbSmall->getSrc()}"
+                         width="{$thumbSmall->getWidth()}"
+                         height="{$thumbSmall->getHeight()}"
+                         loading="lazy"
+                         class="img-fluid"
+                    >
+                </div>
+            </a>
+        {/foreach}
+    </div>
+{/if}

@@ -161,12 +161,12 @@ class NavbarDataset
             ],
             [
                 'name' => 'Kariéra',
-                'link' => '#',
+                'link' => $this->generator->generate('career'),
                 'active' => false,
                 'dropdown' => null
             ],
             [
-                'name' => 'Kontakt',
+                'name' => 'Kontakty',
                 'link' => $this->generator->generate('contact'),
                 'active' => false,
                 'dropdown' => null

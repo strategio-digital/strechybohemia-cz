@@ -1,0 +1,52 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType array $data}
+
+{varType array $files}
+{varType array $file}
+{varType array|null $cover}
+
+{extends './../@layout.latte'}
+
+{php $files = array_filter($data['item']['files'], fn($file) => Nette\Utils\Strings::startsWith($file['mimeType'], 'image/'))}
+{php $cover = current(array_filter($files, fn($file) => $file['cover'] === true))}
+{php $files = array_filter($files, fn($file) => $file['cover'] !== true)}
+
+{block head}
+    {include './../components/article/head.latte'}
+    {include parent}
+{/block}
+
+{block content}
+    {include './../components/career/header.latte'}
+
+    {include './../components/career/sub-header-cta.latte'}
+
+    <section class="py-5 py-md-7 bg-light" id="volne-pozice">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 order-1 order-md-0" style="z-index: 1">
+                    {include './../components/career/jobs.latte'}
+                </div>
+                <div class="col-md-5 order-0 order-md-1" style="z-index: 0">
+                    {include './../components/career/form.latte'}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5 my-md-7">
+        <div class="text-center mb-5">
+            <h2 class="h1">Seznam se s naší přátelskou partou</h2>
+            <p class="lead">Tví budoucí kolegové, nejsou žádní morousové, budou ti vždy oporou a rádi se vším pomohou.</p>
+        </div>
+        {include './../components/article/gallery.latte'}
+    </div>
+
+    {include './../components/career/benefits.latte'}
+
+    {include './../components/career/do-better-work.latte'}
+{/block}

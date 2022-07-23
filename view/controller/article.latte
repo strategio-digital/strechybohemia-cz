@@ -30,12 +30,11 @@
                     <h1 class="display-4 fw-bold mb-0 d-inline-block mb-0">{$data['item']['title']}</h1>
                     <div class="rounded-circle bg-white p-2 img-icon-container shadow-sm">
                         {var $thumbCover = $thumbGen->create($cover['filePath'], 140, 140)}
-                        <img id="{$cover['name']|webalize}"
+                        <img class="rounded-circle img-icon"
                              alt="{$cover['description']}"
                              src="{$thumbCover->getSrc()}"
                              width="{$thumbCover->getWidth()}"
                              height="{$thumbCover->getHeight()}"
-                             class="rounded-circle img-icon"
                         >
                     </div>
                 </div>
@@ -51,26 +50,7 @@
                 {$data['item']['description']|noescape}
             </div>
 
-            <div class="row g-4" data-gallery-container>
-                {foreach $files as $file}
-                    {var $thumbBig = $thumbGen->create($file['filePath'], 1440, null, 'SHRINK_ONLY')}
-                    {var $thumbSmall = $thumbGen->create($file['filePath'], 400, 300)}
-
-                    <a href="{$thumbBig->getSrc()}" class="col-6 col-sm-4 col-lg-3"
-                       title="{$file['description'] ?: ' '}">
-                        <div class="d-block bg-light p-3 border">
-                            <img id="{$file['name']|webalize}"
-                                 alt="{$file['description']}"
-                                 src="{$thumbSmall->getSrc()}"
-                                 width="{$thumbSmall->getWidth()}"
-                                 height="{$thumbSmall->getHeight()}"
-                                 loading="lazy"
-                                 class="img-fluid"
-                            >
-                        </div>
-                    </a>
-                {/foreach}
-            </div>
+            {include './../components/article/gallery.latte'}
         </div>
     </section>
 {/block}
