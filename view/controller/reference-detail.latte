@@ -1,0 +1,89 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType array $data}
+
+{varType array $files}
+{varType array $file}
+{varType array|null $cover}
+
+{extends './../@layout.latte'}
+
+{php $files = array_filter($data['item']['files'], fn($file) => Nette\Utils\Strings::startsWith($file['mimeType'], 'image/'))}
+{php $cover = current(array_filter($files, fn($file) => $file['cover'] === true))}
+{php $files = array_filter($files, fn($file) => $file['cover'] !== true)}
+
+{block head}
+    {include './../components/article/head.latte'}
+    {include parent}
+{/block}
+
+{block content}
+    <header class="pt-5 pt-md-8" style="background-color: #e44c4c">
+        <div class="container position-relative text-white text-center">
+            <div class="h4 fw-bold text-uppercase mb-2 text-white text-opacity-75">Reference</div>
+            <h1 class="display-4 fw-bold mb-0">{$data['item']['title']}</h1>
+        </div>
+    </header>
+
+    {if $data['item']['descriptionExtra']}
+        <div class="pt-5 pt-md-6" style="background-color: #e44c4c; margin-top: -2px">
+            <div class="position-relative" style="background-color: #e44c4c;">
+                <div class="position-absolute bottom-0 w-100 bg-white" style="height: 50%"></div>
+                <div class="container d-flex justify-content-center text-center">
+                    <div class="p-4 p-sm-5 bg-white shadow-sm rounded-1" style="z-index: 1; max-width: 600px">
+                        <div class="h5 fst-italic">„{$data['item']['descriptionShort']}“</div>
+                        <div class="small">{$data['item']['descriptionExtra']}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {else}
+        <div class="pt-5 pt-md-8" style="background-color: #e44c4c;">&nbsp;</div>
+    {/if}
+
+    <section class="position-relative">
+        <div class="position-relative bg-white py-5 py-md-7">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-7 order-0">
+                        <div n:if="$data['item']['videoLink']" class="video shadow-sm rounded-3 overflow-hidden" style="margin-bottom: 1.8rem">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/{$data['item']['videoLink']|replace:'https://youtu.be/'}" title="{$data['item']['title']}" loading="lazy" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        {include './../components/paragraphs.latte'}
+
+                        <div class="d-none justify-content-center mt-5 d-lg-flex" n:if="$data['prev'] || $data['next']">
+                            {include './../components/prev-next-reverse.latte' title: 'reference', routeName: 'reference_detail'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-xl-4 offset-xl-1">
+                        <div class="bg-light p-4 p-sm-5 mt-4 mt-lg-0 rounded-3">
+                            <div class="typography">
+                                <h2 class="mb-3" n:if="$data['item']['panelTitle']">{$data['item']['panelTitle']}</h2>
+                                {$data['item']['panelDescription']|noescape}
+                            </div>
+
+                            <a href="#poptavka" class="btn btn-primary btn-lg mt-4">
+                                <span class="fs-6">Poptat realizační firmu</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5 d-lg-none" n:if="$data['prev'] || $data['next']">
+                    {include './../components/prev-next-reverse.latte' title: 'reference', routeName: 'reference_detail'}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {include './../components/page-footer-cta.latte'}
+{/block}

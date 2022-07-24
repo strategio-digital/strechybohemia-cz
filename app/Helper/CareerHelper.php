@@ -34,8 +34,9 @@ class CareerHelper
                 $jobNames[$jobName] = $jobName;
             }
         }
-    
-        sort($jobNames, SORT_LOCALE_STRING);
+        
+        $collator = new \Collator('cs_CZ.UTF8');
+        $collator->sort($jobNames);
     
         return $jobNames;
     }

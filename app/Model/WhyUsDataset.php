@@ -32,7 +32,7 @@ class WhyUsDataset
             ],
             [
                 'title' => 'Získáváme ocenění a diplomy',
-                'description' => 'Vlastníme mnohá ocenění a různé diplomy, Jsme na to patřičně hrdí.'
+                'description' => 'Vlastníme mnohá ocenění a různé diplomy. Jsme na to patřičně hrdí.'
             ],
             [
                 'title' => 'Klienti si nás váží',

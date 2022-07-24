@@ -40,7 +40,7 @@ import CarrerForm from "./Components/CarrerForm";
         const lg = lightGallery(galleryContainer as HTMLElement, {
             plugins: [lgThumbnail],
             licenseKey: 'your_license_key',
-            speed: 300,
+            speed: 200,
         });
 
         onThumbnailCreate = (params: any, src: string) => {

@@ -36,7 +36,7 @@
                     <a href="{$controller->link('reference_detail', ['slug' => $item['slug']])}" class="text-decoration-none link-dark">
                         <h2 class="h5 mb-3">{$item['title']}</h2>
                         {if $item['descriptionExtra']}
-                            <p class="text-secondary">„{$item['descriptionExtra']}“</p>
+                            <p class="text-secondary">„{$item['descriptionShort']}“</p>
                         {else}
                             <p class="text-secondary">{$item['descriptionShort']}</p>
                         {/if}

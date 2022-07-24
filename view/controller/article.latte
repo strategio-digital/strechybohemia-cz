@@ -48,7 +48,7 @@
 
     <section class="py-5 py-md-7">
         <div class="container">
-            <div n:if="$data['item']['description']">
+            <div n:if="$data['item']['description']" class="typography">
                 {$data['item']['description']|noescape}
             </div>
 
@@ -59,4 +59,8 @@
             {/if}
         </div>
     </section>
+
+    {if $label !== 'strechy'}
+        {include './../components/page-footer-cta.latte'}
+    {/if}
 {/block}

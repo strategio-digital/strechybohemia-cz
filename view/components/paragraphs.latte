@@ -1,0 +1,35 @@
+{*
+ * Copyright (c) 2021 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $data}
+
+{foreach $data['item']['paragraphs'] as $paragraph}
+    <div class="typography">
+        <h2 n:if="$paragraph['title']">{$paragraph['title']}</h2>
+
+        {$paragraph['description']|noescape}
+
+        <div class="video shadow-sm rounded-3 overflow-hidden" n:if="$paragraph['videoLink']">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube-nocookie.com/embed/{$paragraph['videoLink']|replace:'https://youtu.be/'}" title="{$paragraph['title']}" loading="lazy" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        {foreach $paragraph['files'] as $file}
+            <figure n:if="Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')" class="figure" >
+                {var $thumb = $thumbGen->create($file['filePath'], 800, null, 'SHRINK_ONLY')}
+                <img class="figure-img img-fluid rounded shadow-sm"
+                     id="{$file['name']|webalize}"
+                     alt="{$file['description']}"
+                     src="{$thumb->getSrc()}"
+                     width="{$thumb->getWidth()}"
+                     height="{$thumb->getHeight()}"
+                >
+                <figcaption n:if="$file['description']" class="figure-caption">{$file['description']}</figcaption>
+            </figure>
+        {/foreach}
+    </div>
+{/foreach}

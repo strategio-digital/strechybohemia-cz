@@ -1,0 +1,26 @@
+/**
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ */
+
+.typography {
+    line-height: 1.7;
+
+    > * {
+        margin: 0 0 1.7rem 0;
+        &:last-child {
+            margin: 0
+        }
+    }
+
+    p, ul {
+        color: $gray-600;
+        font-size: 1.1rem;
+    }
+
+    li {
+        &:last-child {
+            margin: 0
+        }
+    }
+}

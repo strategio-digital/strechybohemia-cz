@@ -53,7 +53,7 @@ export default () => {
         const timeout = setTimeout(() => {
             phone.focus({preventScroll: true});
             clearTimeout(timeout);
-        }, 350);
+        }, 250);
     }));
 
     salaryInp.addEventListener('change', ({currentTarget}) => {

@@ -48,6 +48,27 @@ class ReferenceController extends BaseController
     #[Template(path: __DIR__ . '/../../view/controller/reference-detail.latte')]
     public function detail(string $slug) : void
     {
-        bdump($slug);
+        $this->addRequest('reference_detail', 'POST', "article/show-one", [
+            'json' => [
+                'slug' => $slug,
+                'suppressLabels' => true,
+                'suppressFiles' => false,
+                'suppressParagraphs' => false,
+                'suppressParagraphFiles' => false,
+                'suppressPrevNext' => false,
+                'suppressPrevNextFiles' => false,
+                'prevNextByLabel' => 'reference'
+            ]
+        ]);
+    
+        $responses = $this->dispatchRequests('Reference Detail');
+        $response = $responses['reference_detail'];
+        $contents = $response->getBody()->getContents();
+    
+        if ($response->getStatusCode() !== Response::HTTP_OK) {
+            $this->renderError($response, $contents);
+        }
+    
+        $this->template->data = json_decode($contents, true);
     }
 }

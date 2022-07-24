@@ -1,0 +1,125 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType Strategio\Controller\Base\BaseController $controller}
+{varType string $title}
+{varType string $routeName}
+{varType array $data}
+
+{var $prev = $data['prev']}
+{var $next = $data['next']}
+
+
+<div class="w-100">
+    <div class="row justify-content-between gy-4">
+
+        {if $next}
+            <div class="col-md-6 col-lg-12 col-xl-6">
+                <a href="{$controller->link($routeName, ['slug' => $next['slug']])}" class="prev-next p-4 bg-light d-flex align-items-center text-decoration-none rounded-3">
+                    <div>
+                        {var $file = current(array_filter($next['files'], fn(array $file) => $file['cover'] === true))}
+                        {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                            {var $thumb = $thumbGen->create($file['filePath'], 100, 100)}
+                            <img alt="{$next['title']}"
+                                 src="{$thumb->getSrc()}"
+                                 width="{$thumb->getWidth()}"
+                                 height="{$thumb->getHeight()}"
+                            >
+                        {else}
+                            <img src="https://dummyimage.com/100x100" alt="{$next['title']}" class="w-full h-full object-cover">
+                        {/if}
+                    </div>
+                    <div class="ms-4">
+                        <div class="small text-secondary mb-1">Předchozí {$title}</div>
+                        <div class="h6 fw-bolder text-dark mb-0">{$next['title']}</div>
+                    </div>
+                </a>
+            </div>
+        {/if}
+
+        {if $prev}
+            <div class="col-md-6 col-lg-12 col-xl-6">
+                <a href="{$controller->link($routeName, ['slug' => $prev['slug']])}" class="prev-next p-4 bg-light d-flex align-items-center text-decoration-none rounded-3">
+                    <div>
+                        {var $file = current(array_filter($prev['files'], fn(array $file) => $file['cover'] === true))}
+                    {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                            {var $thumb = $thumbGen->create($file['filePath'], 100, 100)}
+                            <img alt="{$prev['title']}"
+                                 src="{$thumb->getSrc()}"
+                                 width="{$thumb->getWidth()}"
+                                 height="{$thumb->getHeight()}"
+                            >
+                        {else}
+                            <img src="https://dummyimage.com/100x100" alt="{$prev['title']}" class="w-full h-full object-cover">
+                        {/if}
+                    </div>
+                    <div class="ms-4">
+                        <div class="small text-secondary mb-1">Další {$title}</div>
+                        <div class="h6 fw-bolder text-dark mb-0">{$prev['title']}</div>
+                    </div>
+                </a>
+            </div>
+        {/if}
+    </div>
+</div>
+
+{*<div class="container">
+    <div class="">
+        {if $next}
+            <a href="{$controller->link($routeName, ['slug' => $next['slug']])}" class="">
+                <div class="">
+                    {var $file = current(array_filter($next['files'], fn(array $file) => $file['cover'] === true))}
+                    {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                        {var $thumb = $thumbGen->create($file['filePath'], 100, 100)}
+                        <img class="w-full h-full object-cover"
+                             id="{$file['name']|webalize}"
+                             alt="{$next['title']}"
+                             src="{$thumb->getSrc()}"
+                             width="{$thumb->getWidth()}"
+                             height="{$thumb->getHeight()}"
+                             loading="lazy"
+                        >
+                    {else}
+                        <img src="https://dummyimage.com/100x100" alt="{$next['title']}" class="w-full h-full object-cover">
+                    {/if}
+                </div>
+                <div class="">
+                    <div class="">Předchozí {$title}</div>
+                    <div class="">{$next['title']}</div>
+                </div>
+            </a>
+        {else}
+            <span></span>
+        {/if}
+
+        {if $prev}
+            <a href="{$controller->link($routeName, ['slug' => $prev['slug']])}" class="relative bg-gray-100 p-6 lg:max-w-[450px] w-full flex items-center gap-x-5 text-blue-dark hover:text-rose-800">
+                <div class="w-full max-w-[100px] max-h-[100px] order-first lg:order-last hidden sm:block">
+                    {var $file = current(array_filter($prev['files'], fn(array $file) => $file['cover'] === true))}
+                    {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                        {var $thumb = $thumbGen->create($file['filePath'], 100, 100)}
+                        <img class="w-full h-full object-cover"
+                             id="{$file['name']|webalize}"
+                             alt="{$prev['title']}"
+                             src="{$thumb->getSrc()}"
+                             width="{$thumb->getWidth()}"
+                             height="{$thumb->getHeight()}"
+                             loading="lazy"
+                        >
+                    {else}
+                        <img src="https://dummyimage.com/100x100" alt="{$prev['title']}" class="w-full h-full object-cover">
+                    {/if}
+                </div>
+                <div class="w-full">
+                    <div class="text-sm mb-1 text-gray-500">Další {$title}</div>
+                    <div class="text-lg font-bold">{$prev['title']}</div>
+                </div>
+            </a>
+        {else}
+            <span></span>
+        {/if}
+    </div>
+</div>*}

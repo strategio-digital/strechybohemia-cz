@@ -91,7 +91,7 @@ class NavbarDataset
             ],
             [
                 'name' => 'Reference',
-                'link' => $this->generator->generate('reference_list', ['page' => 1]),
+                'link' => $this->generator->generate('reference_list_home'),
                 'active' => false,
                 'dropdown' => null,
             ],
