@@ -8,16 +8,16 @@
 
 {define accordion array $items, int $openPos}
     <div class="accordion accordion-flush" id="faq-accordion">
-        {foreach $items as $item}
+        {foreach $items as $reference}
             {var $open = $iterator->getCounter() === $openPos}
             <div class="accordion-item border mb-3 rounded-3">
                 <h2 class="accordion-header rounded-3" id="faq-heading-{$iterator->getCounter()}">
                     <button class="accordion-button rounded-3 {if !$open}collapsed{/if}" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse-{$iterator->getCounter()}" aria-expanded="{if $open}true{else}false{/if}" aria-controls="faq-collapse-{$iterator->getCounter()}">
-                        {$iterator->getCounter()}. {$item['title']}
+                        {$iterator->getCounter()}. {$reference['title']}
                     </button>
                 </h2>
                 <div id="faq-collapse-{$iterator->getCounter()}" class="accordion-collapse collapse {if $open}show{/if}" aria-labelledby="faq-heading-{$iterator->getCounter()}" data-bs-parent="#faq-accordion">
-                    <div class="accordion-body">{$item['description']|noescape}</div>
+                    <div class="accordion-body">{$reference['description']|noescape}</div>
                 </div>
             </div>
         {/foreach}

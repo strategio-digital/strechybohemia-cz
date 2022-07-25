@@ -21,14 +21,14 @@
 
         <div class="collapse navbar-collapse" id="navbar-toggler">
             <ul class="navbar-nav ms-auto text-end">
-                {foreach $navbar as $item}
-                    {if $item['dropdown']}
+                {foreach $navbar as $reference}
+                    {if $reference['dropdown']}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {$item['active'] ? 'active'}" href="{$item['link']}" id="nav-{$item['name']|webalize}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {$item['name']}
+                            <a class="nav-link dropdown-toggle {$reference['active'] ? 'active'}" href="{$reference['link']}" id="nav-{$reference['name']|webalize}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {$reference['name']}
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="nav-{$item['name']|webalize}">
-                                {foreach $item['dropdown'] as $subItem}
+                            <ul class="dropdown-menu" aria-labelledby="nav-{$reference['name']|webalize}">
+                                {foreach $reference['dropdown'] as $subItem}
                                     {if !$subItem['link'] && !$subItem['name']}
                                         <li><hr class="dropdown-divider"></li>
                                     {else}
@@ -40,17 +40,17 @@
                     {else}
                         <li class="nav-item">
                             {if $iterator->isFirst()}
-                                <a class="nav-link {$item['active'] ? 'active'}" href="{$item['link']}">
+                                <a class="nav-link {$reference['active'] ? 'active'}" href="{$reference['link']}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill d-none d-md-inline mb-1" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                                         <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                                     </svg>
-                                    <span class="d-inline d-md-none ms-2">{$item['name']}</span>
+                                    <span class="d-inline d-md-none ms-2">{$reference['name']}</span>
                                 </a>
                             {elseif $iterator->isLast()}
-                                <a href="{$item['link']}" class="btn btn-outline-danger ms-2 {$item['active'] ? 'fw-bold'}">{$item['name']}</a>
+                                <a href="{$reference['link']}" class="btn btn-outline-danger ms-2 {$reference['active'] ? 'fw-bold'}">{$reference['name']}</a>
                             {else}
-                                <a class="nav-link {$item['active'] ? 'active'}" href="{$item['link']}">{$item['name']}</a>
+                                <a class="nav-link {$reference['active'] ? 'active'}" href="{$reference['link']}">{$reference['name']}</a>
                             {/if}
                         </li>
                     {/if}

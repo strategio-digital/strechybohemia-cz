@@ -1,0 +1,30 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+
+<header class="position-relative h-75">
+    <div class="position-absolute top-0 w-100 h-100">
+        <video muted loop autoplay class="video-background">
+            <source src="{$assets->get('/img/strechy-bohemia-video.mp4')}" type="video/mp4">
+        </video>
+    </div>
+    <div class="container position-relative h-100 d-flex align-items-center justify-content-center">
+        <div class="text-center ">
+            <div class="h3 mb-0 fw-bold text-uppercase">Střechy Bohemia</div>
+            <h1 class="display-3 fw-bold text-center my-4 text-uppercase" style="max-width: 1000px; ">Realizace střech a střešních konstrukcí</h1>
+
+            <a href="#sluzby" class="btn btn-dark btn-lg py-sm-3 px-sm-4 px-md-5 mt-2 shadow">
+                <span class="fs-5">Přehled služeb</span>
+            </a>
+            <a href="#poptavka" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 ms-sm-3 mt-2 shadow d-none d-md-inline-block">
+                <span class="fs-5">Poptat realizaci</span>
+            </a>
+            <a href="#contactForm" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 ms-sm-3 mt-2 shadow d-inline-block d-md-none">
+                <span class="fs-5">Poptat realizaci</span>
+            </a>
+        </div>
+    </div>
+</header>

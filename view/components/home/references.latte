@@ -1,0 +1,63 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType Strategio\Controller\HomeController $controller}
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $references}
+
+<section class="py-5 py-md-8">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Reference</h2>
+            <p class="lead">Příběhy a ke vší spokojenosti vyřešené problémy lidí, kteří se na nás obrátili.</p>
+        </div>
+
+        <div class="row g-xl-5">
+            <div class="col-sm-6 col-lg-4 {if $iterator->isLast()}d-sm-none d-lg-block{/if}" n:foreach="$references as $reference">
+                <div class="bg-light p-4">
+                    {var $file = current(array_filter($reference['files'], fn(array $file) => $file['cover'] === true))}
+                        {if $reference['videoLink']}
+                        <div class="ratio ratio-4x3">
+                            <iframe src="https://www.youtube-nocookie.com/embed/DdW1OaP4tHc" title="" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    {elseif $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                        {var $thumb = $thumbGen->create($file['filePath'], 520, 390)}
+                        <a href="{$controller->link('reference_detail', ['slug' => $reference['slug']])}">
+                            <img class="img-fluid" alt="{$reference['title']}" src="{$thumb->getSrc()}" width="{$thumb->getWidth()}" height="{$thumb->getHeight()}" loading="lazy">
+                        </a>
+                    {else}
+                        <a href="{$controller->link('reference_detail', ['slug' => $reference['slug']])}">
+                            <img src="https://dummyimage.com/520x390" alt="{$reference['title']}" class="img-fluid" width="520" height="390" loading="lazy">
+                        </a>
+                    {/if}
+                </div>
+
+                <div class="p-4">
+                    <a href="{$controller->link('reference_detail', ['slug' => $reference['slug']])}" class="text-decoration-none link-dark">
+                        <h2 class="h5 mb-3">{$reference['title']}</h2>
+                        {if $reference['descriptionExtra']}
+                            <p class="text-secondary fst-italic">„{$reference['descriptionShort']}“</p>
+                        {else}
+                            <p class="text-secondary">{$reference['descriptionShort']}</p>
+                        {/if}
+                    </a>
+
+                    <a href="{$controller->link('reference_detail', ['slug' => $reference['slug']])}">
+                        <span>Přečíst více</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{$controller->link('reference_list_home')}" class="btn btn-outline-danger btn-lg py-2 px-4 shadow-sm">
+                <span class="fs-6">Načíst další reference</span>
+            </a>
+        </div>
+    </div>
+</section>

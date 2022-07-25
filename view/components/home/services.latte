@@ -1,0 +1,41 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+{varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
+{varType array $services}
+
+<section class="py-5 py-md-8" id="sluzby" style="background-color: rgba(225,56,56,0.9); background-image: url({$assets->get('/img/section-bg.png')});">
+    <div class="container">
+        <div class="text-center mb-5 text-white">
+            <h2 class="display-5 fw-bold">Služby a specializace</h2>
+            <p class="lead">Naší doménou jsou stavby střech, jejich rekonstrukce, pravidelné revize a okamžitý servis.</p>
+        </div>
+
+        <div class="row g-md-5">
+            <div class="col-sm-6 col-lg-3 mt-7" n:foreach="$services as $service">
+                <div class="position-relative bg-white shadow rounded-1 h-100">
+                    <div class="position-absolute start-0 end-0 text-center" style="margin-top: -40px">
+                        {var $file = current(array_filter($service['files'], fn(array $file) => $file['cover'] === true))}
+                        {if $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
+                            {var $thumb = $thumbGen->create($file['filePath'], 80, 80)}
+                            <img class="img-fluid rounded-circle border border-3 border-white"
+                                 alt="{$file['description'] ?: $service['title']}"
+                                 src="{$thumb->getSrc()}"
+                                 width="{$thumb->getWidth()}"
+                                 height="{$thumb->getHeight()}"
+                            >
+                        {else}
+                            <img src="//dummyimage.com/80" alt="" class="img-fluid rounded-circle border border-3 border-white">
+                        {/if}
+                    </div>
+                    <div class="py-5 px-3 px-lg-4 d-flex align-items-center justify-content-center text-center h-100">
+                        <h2 class="h6 mt-3 mb-0 text-dark fw-bold">{$service['title']}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
