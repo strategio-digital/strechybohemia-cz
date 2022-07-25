@@ -6,23 +6,28 @@
 {varType ContentioSdk\Component\AssetLoader $assets}
 
 <header class="position-relative h-75">
-    <div class="position-absolute top-0 w-100 h-100">
-        <video muted loop autoplay class="video-background">
+    <div class="position-absolute top-0 w-100 h-100 overflow-hidden">
+        <img src="{$assets->get('/img/header-bg.jpg')}" alt="Střechy Bohemia" class="position-absolute w-100 h-100 d-sm-none" style="object-fit: cover">
+        <div class="position-relative w-100 h-100 d-sm-none" style="background-color: white; opacity: .8"></div>
+
+        <video muted loop autoplay class="position-relative video-background d-none d-sm-block">
             <source src="{$assets->get('/img/strechy-bohemia-video.mp4')}" type="video/mp4">
         </video>
     </div>
     <div class="container position-relative h-100 d-flex align-items-center justify-content-center">
         <div class="text-center ">
-            <div class="h3 mb-0 fw-bold text-uppercase">Střechy Bohemia</div>
-            <h1 class="display-3 fw-bold text-center my-4 text-uppercase" style="max-width: 1000px; ">Realizace střech a střešních konstrukcí</h1>
+            <div class="h3 mb-0 fw-bold text-uppercase text-danger">Střechy Bohemia</div>
+            <h1 class="display-3 fw-bold text-center my-4 text-" style="max-width: 1000px; ">Realizace střech <br>a střešních konstrukcí</h1>
 
-            <a href="#sluzby" class="btn btn-dark btn-lg py-sm-3 px-sm-4 px-md-5 mt-2 shadow">
+            <a href="#sluzby" class="btn btn-dark btn-lg py-sm-3 px-sm-4 px-md-5 mt-3 shadow d-none d-sm-inline-block me-3">
                 <span class="fs-5">Přehled služeb</span>
             </a>
-            <a href="#poptavka" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 ms-sm-3 mt-2 shadow d-none d-md-inline-block">
+
+            <a href="#poptavka" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 mt-3 shadow d-none d-md-inline-block">
                 <span class="fs-5">Poptat realizaci</span>
             </a>
-            <a href="#contactForm" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 ms-sm-3 mt-2 shadow d-inline-block d-md-none">
+
+            <a href="#contactForm" class="btn btn-danger btn-lg py-sm-3 px-sm-4 px-md-5 mt-3 shadow d-md-none">
                 <span class="fs-5">Poptat realizaci</span>
             </a>
         </div>

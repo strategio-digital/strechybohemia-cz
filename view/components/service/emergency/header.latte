@@ -5,9 +5,14 @@
 
 {varType ContentioSdk\Component\AssetLoader $assets}
 
-<video muted loop autoplay class="video-background">
-    <source src="{$assets->get('/img/strechy-bohemia-video.mp4')}" type="video/mp4">
-</video>
+<div class="position-absolute top-0 w-100 h-100 overflow-hidden">
+    <img src="{$assets->get('/img/header-bg.jpg')}" alt="Střechy Bohemia" class="position-absolute w-100 h-100 d-sm-none" style="object-fit: cover">
+    <div class="position-relative w-100 h-100 d-sm-none" style="background-color: white; opacity: .8"></div>
+
+    <video muted loop autoplay class="position-relative video-background d-none d-sm-block">
+        <source src="{$assets->get('/img/strechy-bohemia-video.mp4')}" type="video/mp4">
+    </video>
+</div>
 
 <div class="container h-100 py-7 py-md-10 position-relative">
     <img src="{$assets->get('/img/servis-character.svg')}" alt="Opravy střech" class="header-character">
