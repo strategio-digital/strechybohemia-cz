@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afd7d970f9b48dd21fbaab67a8025697",
+    "content-hash": "a8f34b329b06387b446a4dd2fb3a8dc2",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1111,16 +1111,16 @@
         },
         {
             "name": "strategio/contentio-sdk",
-            "version": "v0.0.15",
+            "version": "v0.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/strategio-digital/contentio-sdk.git",
-                "reference": "cd5db0bf608b729b8106a549f4e3d89598e64dc2"
+                "reference": "be3daccd1a5654a8926156623fff61a083cd8988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strategio-digital/contentio-sdk/zipball/cd5db0bf608b729b8106a549f4e3d89598e64dc2",
-                "reference": "cd5db0bf608b729b8106a549f4e3d89598e64dc2",
+                "url": "https://api.github.com/repos/strategio-digital/contentio-sdk/zipball/be3daccd1a5654a8926156623fff61a083cd8988",
+                "reference": "be3daccd1a5654a8926156623fff61a083cd8988",
                 "shasum": ""
             },
             "require": {
@@ -1137,7 +1137,7 @@
                 "tracy/tracy": "^2.9"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1.4"
+                "phpstan/phpstan": "^1.8"
             },
             "type": "library",
             "autoload": {
@@ -1158,9 +1158,9 @@
             "description": "PHP SDK for Contentio CRM websites",
             "support": {
                 "issues": "https://github.com/strategio-digital/contentio-sdk/issues",
-                "source": "https://github.com/strategio-digital/contentio-sdk/tree/v0.0.15"
+                "source": "https://github.com/strategio-digital/contentio-sdk/tree/v0.0.16"
             },
-            "time": "2022-07-21T22:53:59+00:00"
+            "time": "2022-07-26T18:27:09+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",

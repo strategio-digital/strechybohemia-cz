@@ -29,7 +29,7 @@ export default (formValidator: IFormValidator, form: HTMLFormElement | null, rul
             try {
                 await Axios.post('lead/create', {type: 'careerForm', params});
                 formValidator.addAlert(form, false, 'Děkujeme, do 24 hodin se Vám na uvedený kontakt ozveme.');
-                trackLeadGenerate();
+                trackLeadGenerate('career');
                 form.reset();
             } catch (err: any) {
                 formValidator.addAlert(form, true, 'Akce se nezdařila. Zadali jste správný kontakt?');

@@ -14,7 +14,7 @@
         "php": "^8.1",
         "ext-intl": "*",
         "ext-json": "*",
-        "strategio/contentio-sdk": "v0.0.15"
+        "strategio/contentio-sdk": "v0.0.16"
     },
     "autoload": {
         "psr-4": {
