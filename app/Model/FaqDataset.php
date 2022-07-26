@@ -21,7 +21,7 @@ class FaqDataset
             ],
             [
                 'title' => 'Za jak dlouho technik přijede?',
-                'description' => 'Technik z pravidla vyjede do 24 hodin, kompletní servis je vyřízen nejdéle do 5 pracovních dnů od objednání (pokud se tedy nedomluvíte na jiném termínu).'
+                'description' => 'Technik zpravidla vyjede do 24 hodin, kompletní servis je vyřízen nejdéle do 5 pracovních dnů od objednání (pokud se tedy nedomluvíte na jiném termínu).'
             ],
             [
                 'title' => 'Co mám dělat do doby, než přijede technik?',

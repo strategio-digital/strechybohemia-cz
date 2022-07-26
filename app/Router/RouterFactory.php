@@ -26,8 +26,8 @@ class RouterFactory extends BaseRouter
         $this->add('contact', '/kontakt', [ContactController::class, 'index']);
         $this->add('career', '/kariera', [CareerController::class, 'index']);
         
-        $this->add('service_emergency', '/opravy-a-servis-strech-24-7', [ServiceController::class, 'emergency']);
-        $this->add('service_revisions', '/pravidelne-revize-a-kontroly-strech', [ServiceController::class, 'revisions']);
+        $this->add('service_emergency', '/sluzby/opravy-a-servis-strech-24-7', [ServiceController::class, 'emergency']);
+        $this->add('service_revisions', '/sluzby/pravidelne-revize-a-kontroly-strech', [ServiceController::class, 'revisions']);
     
         $this->add('reference_list_home', '/reference', [ReferenceController::class, 'index']);
         $this->add('reference_list', '/reference/strana/{page<\d+>}', [ReferenceController::class, 'index']);

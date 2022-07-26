@@ -20,7 +20,7 @@ class WhyUsDataset
             ],
             [
                 'title' => 'Jsme cenově dostupní',
-                'description' => 'Jen na Vás záleží kolik investujete do střechy. Nejdražší není vždy nejlepší.'
+                'description' => 'Jen na Vás záleží, kolik investujete do střechy. Nejdražší není vždy nejlepší.'
             ],
             [
                 'title' => 'Poskytujeme časovou flexibilitu',

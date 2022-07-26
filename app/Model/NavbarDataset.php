@@ -28,7 +28,7 @@ class NavbarDataset
                 'active' => false,
                 'dropdown' => [
                     [
-                        'name' => 'Pohotovostní servis 24/7',
+                        'name' => 'Opravy a servis 24/7',
                         'link' => $this->generator->generate('service_emergency'),
                         'active' => false,
                     ],
@@ -96,7 +96,7 @@ class NavbarDataset
                 'dropdown' => null,
             ],
             [
-                'name' => 'Typy sřech',
+                'name' => 'Typy střech',
                 'link' => '#',
                 'active' => false,
                 'dropdown' => [

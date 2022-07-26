@@ -52,8 +52,9 @@ export default () => {
 
         const timeout = setTimeout(() => {
             phone.focus({preventScroll: true});
+            (form.querySelector('[type="submit"]') as HTMLButtonElement).click();
             clearTimeout(timeout);
-        }, 250);
+        }, 550);
     }));
 
     salaryInp.addEventListener('change', ({currentTarget}) => {
