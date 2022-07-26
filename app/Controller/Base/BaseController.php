@@ -43,6 +43,27 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
     {
         parent::startup();
         
+        $primaryHost = 'https://www.strechybohemia.cz';
+    
+        $map = [
+            '/havarijni' => $this->link('service_emergency'),
+            '/pravidelny' => $this->link('service_revisions'),
+            '/obchod' => $this->link('home')
+        ];
+    
+        $uri = $this->request->getRequestUri();
+        $host = $this->request->getHost();
+    
+        if (array_key_exists($uri, $map)) {
+            $this->redirect($primaryHost . $map[$uri], Response::HTTP_MOVED_PERMANENTLY);
+        }
+    
+        if ($host === 'servis.strechybohemia.cz' || $host === 'web.strechybohemia.cz') {
+            $this->redirect($primaryHost . $uri);
+        }
+    
+        $this->redirectToWww('strechybohemia.cz');
+        
         $this->template->navbar = NavbarHelper::activate($this->navbarDataset->get(), $this->request);
         $this->template->contacts = $this->contactDataset;
         $this->template->whyUs = $this->whyUsDataset;

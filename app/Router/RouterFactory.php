@@ -12,6 +12,7 @@ use Strategio\Controller\CareerController;
 use Strategio\Controller\ContactController;
 use Strategio\Controller\HomeController;
 use Strategio\Controller\ArticleController;
+use Strategio\Controller\RedirectController;
 use Strategio\Controller\ReferenceController;
 use Strategio\Controller\ServiceController;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -21,6 +22,10 @@ class RouterFactory extends BaseRouter
     public function createRoutes(): UrlMatcher
     {
         $routes = parent::createRoutes();
+        
+        $this->add('redirect_1', '/obchod', [RedirectController::class, 'index']);
+        $this->add('redirect_2', '/havarijni', [RedirectController::class, 'index']);
+        $this->add('redirect_3', '/pravidelny', [RedirectController::class, 'index']);
         
         $this->add('home', '/', [HomeController::class, 'index']);
         $this->add('contact', '/kontakt', [ContactController::class, 'index']);
