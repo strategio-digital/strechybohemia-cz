@@ -6,8 +6,8 @@
 {varType ContentioSdk\Component\Thumbnail\ThumbGen $thumbGen}
 {varType array $data}
 
-{foreach $data['item']['paragraphs'] as $paragraph}
-    <div class="typography">
+<div class="typography" n:if="count($data['item']['paragraphs']) !== 0">
+    {foreach $data['item']['paragraphs'] as $paragraph}
         <h2 n:if="$paragraph['title']">{$paragraph['title']}</h2>
 
         {$paragraph['description']|noescape}
@@ -31,5 +31,5 @@
                 <figcaption n:if="$file['description']" class="figure-caption">{$file['description']}</figcaption>
             </figure>
         {/foreach}
-    </div>
-{/foreach}
+    {/foreach}
+</div>
