@@ -18,7 +18,7 @@
                     {var $file = current(array_filter($item['files'], fn(array $file) => $file['cover'] === true))}
                     {if $item['videoLink']}
                         <div class="ratio ratio-4x3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/DdW1OaP4tHc" title="" allowfullscreen loading="lazy"></iframe>
+                            <iframe src="https://www.youtube-nocookie.com/embed/{$item['videoLink']|replace:'https://youtu.be/'}" title="{$item['title']}" allowfullscreen loading="lazy"></iframe>
                         </div>
                     {elseif $file && Nette\Utils\Strings::startsWith($file['mimeType'], 'image/')}
                         {var $thumb = $thumbGen->create($file['filePath'], 520, 390)}
