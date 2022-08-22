@@ -75,10 +75,6 @@ class ServiceController extends BaseController
         $this->template->data = json_decode($contents, true);
         $this->template->testimonials = $this->testimonialDataset;
         $this->template->faq = $this->faqDataset;
-        
-        $this->template->envs = json_encode(array_merge((array)json_decode($this->template->envs, true), [
-            'OLD_API_URL' => $_ENV['OLD_API_URL']
-        ]));
     }
     
     #[Template(path: __DIR__ . '/../../view/controller/service/emergency.latte')]

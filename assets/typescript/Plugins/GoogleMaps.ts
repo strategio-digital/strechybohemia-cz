@@ -3,7 +3,8 @@ import {Loader} from "@googlemaps/js-api-loader";
 
 export const LoadGoogleMapApi = () => {
     const loader = new Loader({
-        apiKey: "AIzaSyD7WQ71GhekF2iI-PkzwjLtwt2eKqXG1TU",
+        //@ts-ignore
+        apiKey: window.envs.GOOGLE_MAPS_API_KEY,
         version: "weekly",
         language: 'cs',
         libraries: ['places']

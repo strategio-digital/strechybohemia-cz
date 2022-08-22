@@ -67,5 +67,10 @@ abstract class BaseController extends \ContentioSdk\Controller\Base\BaseControll
         $this->template->navbar = NavbarHelper::activate($this->navbarDataset->get(), $this->request);
         $this->template->contacts = $this->contactDataset;
         $this->template->whyUs = $this->whyUsDataset;
+    
+        $this->template->envs = json_encode(array_merge((array)json_decode($this->template->envs, true), [
+            'OLD_API_URL' => $_ENV['OLD_API_URL'],
+            'GOOGLE_MAPS_API_KEY' => $_ENV['GOOGLE_MAPS_API_KEY']
+        ]));
     }
 }
