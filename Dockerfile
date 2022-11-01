@@ -34,7 +34,7 @@ RUN chmod -R ugo+w ./log
 RUN mkdir -p ./www/temp && chmod -R ugo+rw ./www/temp
 
 # Install and build dependencies
-RUN composer install --prefer-dist --no-scripts && rm -rf /root/.composer
+RUN composer install --prefer-dist --no-scripts --no-cache && rm -rf /root/.composer
 RUN yarn
 RUN yarn prod
 
