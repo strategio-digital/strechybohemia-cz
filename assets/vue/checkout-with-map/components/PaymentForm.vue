@@ -19,9 +19,9 @@
 
     <div class="form-check mb-3">
       <input class="form-check-input" type="radio" name="payment" :value="'online_payment'" id="payment-2"
-             @input="changePayment" :checked="payment.type === 'online_payment'">
+             @input="changePayment" :checked="payment.type === 'online_payment'" disabled>
       <label class="form-check-label" for="payment-2">
-        Online platba kartou
+        Online platba kartou <span class="fw-bold">(dočasně nedostupné)</span>
         <span class="d-block small text-black-50">(Okamžitá platba přes platební bránu GoPay)</span>
       </label>
     </div>
