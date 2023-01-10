@@ -5,6 +5,7 @@ EXPOSE 80
 
 # Set timezone
 ENV TZ="Europe/Prague"
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 
 # Copy project files, Nginx configs & PHP configs
 COPY . /usr/share/nginx/html
@@ -22,8 +23,8 @@ RUN apt-get update && apt-get install -y \
     gnupg
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-    && apt-get update && apt-get install -y nodejs && npm i npm -g
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs && npm i npm -g
 
 # Yarn
 RUN corepack enable
