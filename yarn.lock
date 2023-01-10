@@ -2513,10 +2513,10 @@ content-type@~1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-contentio-app-deps@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/contentio-app-deps/-/contentio-app-deps-0.0.5.tgz#1f4d63da960222f866e2de6fed698a4497e43109"
-  integrity sha512-1rGSrdtwKUxVki4HqD0bVaQyPXzz9hPJ/SgYCbl7CbGNwGFJTD1nxrnMo3pnO7tCqPp8H/p9u2zyybmcx+GilA==
+contentio-app-deps@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/contentio-app-deps/-/contentio-app-deps-0.0.7.tgz#7af29574ffd908d9d248cc71e7205a7d7342dead"
+  integrity sha512-0OazzHwk/8VHaiVOT2JB/tQermx356WVQ5ITkAyR0CBNA2fuxr+OfJiAvOd+hzXUeT153u/sLiFnByZUM/j6fQ==
   dependencies:
     "@tailwindcss/aspect-ratio" "^0.4.0"
     "@tailwindcss/forms" "^0.4.0"
