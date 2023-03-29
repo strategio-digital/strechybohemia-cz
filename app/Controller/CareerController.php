@@ -68,9 +68,9 @@ class CareerController extends BaseController
                 'suppressFiles' => false,
                 'suppressParagraphs' => false,
                 'suppressParagraphFiles' => false,
-                'suppressPrevNext' => false,
-                'suppressPrevNextFiles' => false,
-                'prevNextByLabel' => 'pracovni-pozice'
+                'suppressPrevNext' => true,
+                'suppressPrevNextFiles' => true,
+                'prevNextByLabel' => null
             ]
         ]);
     
