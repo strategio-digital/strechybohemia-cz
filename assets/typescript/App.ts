@@ -3,60 +3,61 @@
  * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
  */
 
-import ThumbGen from "../../vendor/strategio/contentio-sdk/assets/typescript/Components/ThumbGen";
-import FormValidator from "../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator";
-import ContactForm from "../../vendor/strategio/contentio-sdk/assets/typescript/Components/ContactForm";
-import CookieConsent from "../../vendor/strategio/contentio-sdk/assets/typescript/Plugins/CookieConsent";
-import {SetupOptions} from "../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator/types";
+import ThumbGen from '../../vendor/strategio/contentio-sdk/assets/typescript/Components/ThumbGen'
+import FormValidator from '../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator'
+import ContactForm from '../../vendor/strategio/contentio-sdk/assets/typescript/Components/ContactForm'
+import CookieConsent from '../../vendor/strategio/contentio-sdk/assets/typescript/Plugins/CookieConsent'
+import { SetupOptions } from '../../vendor/strategio/contentio-sdk/assets/typescript/Utils/FormValidator/types'
 
-import Bootstrap from "./Plugins/Bootstrap";
-import lightGallery from "lightgallery";
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import {LoadGoogleMapApi, CreateContactMap} from "./Plugins/GoogleMaps";
-import {hideMenuOnScroll} from "./Plugins/SmoothScroll";
+import Bootstrap from './Plugins/Bootstrap'
+import lightGallery from 'lightgallery'
+import lgThumbnail from 'lightgallery/plugins/thumbnail'
+import { LoadGoogleMapApi, CreateContactMap } from './Plugins/GoogleMaps'
+import { hideMenuOnScroll } from './Plugins/SmoothScroll'
 
-import {createApp} from "vue";
-import CheckoutWithMap from "../vue/checkout-with-map/CheckoutWithMap.vue";
-import CarrerJobs from "./Components/CarrerJobs";
-import CarrerForm from "./Components/CarrerForm";
+import { createApp } from 'vue'
+import CheckoutWithMap from '../vue/checkout-with-map/CheckoutWithMap.vue'
+import CareerJobs from './Components/CareerJobs'
+import CareerForm from './Components/CareerForm'
+import CareerFormDetail from './Components/CareerFormDetail'
 
 (async () => {
-    CookieConsent();
+    CookieConsent()
 
     // Smooth Scroll hide menu
-    hideMenuOnScroll();
+    hideMenuOnScroll()
 
     // Init Bootstrap
-    Bootstrap();
+    Bootstrap()
 
     // Career jobs
-    CarrerJobs();
+    CareerJobs()
 
     // Light gallery
-    const galleryContainer = document.querySelector('[data-gallery-container]');
-    let onThumbnailCreate = null;
+    const galleryContainer = document.querySelector('[data-gallery-container]')
+    let onThumbnailCreate = null
 
     if (galleryContainer) {
         const lg = lightGallery(galleryContainer as HTMLElement, {
             plugins: [lgThumbnail],
             licenseKey: 'your_license_key',
-            speed: 200,
-        });
+            speed: 200
+        })
 
         onThumbnailCreate = (params: any, src: string) => {
-            const index = lg.index;
-            const items = lg.getItems();
+            const index = lg.index
+            const items = lg.getItems()
             if (items.filter(item => item.src === src).length > 0) {
-                lg.updateSlides(items, index);
+                lg.updateSlides(items, index)
             }
         }
     }
 
     // Thumbnail generator
     if (onThumbnailCreate) {
-        ThumbGen(onThumbnailCreate);
+        ThumbGen(onThumbnailCreate)
     } else {
-        ThumbGen();
+        ThumbGen()
     }
 
     // Subscribe From validation rules
@@ -79,87 +80,126 @@ import CarrerForm from "./Components/CarrerForm";
         errorClasses: 'is-invalid',
         neutralClasses: 'is-neutral',
         alertSuccessBg: 'bg-success text-white fw-bold mb-3 p-3 rounded-3 text-start',
-        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start',
+        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start'
     }), document.getElementById('contactForm') as HTMLFormElement, [
         {
             name: 'name',
             rules: [
-                {type: 'min', message: 'Jméno musí obsahovat alespoň 3 znaky.', param: {min: 3}},
-                {type: 'max', message: 'Jméno může obsahovat maximálně 100 znaků', param: {max: 100}},
-                {type: 'required', message: 'Jméno je povinné.'},
-            ],
+                { type: 'min', message: 'Jméno musí obsahovat alespoň 3 znaky.', param: { min: 3 } },
+                { type: 'max', message: 'Jméno může obsahovat maximálně 100 znaků', param: { max: 100 } },
+                { type: 'required', message: 'Jméno je povinné.' }
+            ]
         },
         {
             name: 'email',
             rules: [
-                {type: 'required', message: 'E-mail je povinný.'},
-                {type: 'email', message: 'E-mail musí být v platném formátu.'},
-            ],
+                { type: 'required', message: 'E-mail je povinný.' },
+                { type: 'email', message: 'E-mail musí být v platném formátu.' }
+            ]
         },
         {
             name: 'phone',
             rules: [
-                {type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: {min: 9}},
-                {type: 'phone', message: 'Telefon musí být v platném formátu.'},
-                {type: 'required', message: 'Telefon je povinný.'},
-            ],
+                { type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: { min: 9 } },
+                { type: 'phone', message: 'Telefon musí být v platném formátu.' },
+                { type: 'required', message: 'Telefon je povinný.' }
+            ]
         },
         {
             name: 'city',
             rules: [
-                {type: 'min', message: 'Místo realizace musí obsahovat alespoň 2 znaky.', param: {min: 2}},
-                {type: 'max', message: 'Místo realizace může obsahovat maximálně 100 znaků', param: {max: 100}},
-                {type: 'required', message: 'Místo realizace je povinné.'},
-            ],
+                { type: 'min', message: 'Místo realizace musí obsahovat alespoň 2 znaky.', param: { min: 2 } },
+                { type: 'max', message: 'Místo realizace může obsahovat maximálně 100 znaků', param: { max: 100 } },
+                { type: 'required', message: 'Místo realizace je povinné.' }
+            ]
         },
         {
             name: 'message',
             rules: [
-                {type: 'min', message: 'Zpráva musí obsahovat alespoň 10 znaků.', param: {min: 10}},
-                {type: 'max', message: 'Zpráva může obsahovat maximálně 2 300 znaků', param: {max: 2300}},
-                {type: 'required', message: 'Zpráva je povinná.'},
-            ],
+                { type: 'min', message: 'Zpráva musí obsahovat alespoň 10 znaků.', param: { min: 10 } },
+                { type: 'max', message: 'Zpráva může obsahovat maximálně 2 300 znaků', param: { max: 2300 } },
+                { type: 'required', message: 'Zpráva je povinná.' }
+            ]
         }
-    ]);
+    ])
 
-    CarrerForm(FormValidator({
+    CareerForm(FormValidator({
         ...settings,
         errorClasses: 'is-invalid',
         neutralClasses: 'is-neutral',
         alertSuccessBg: 'bg-success text-white fw-bold mb-3 p-3 rounded-3 text-start',
-        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start',
+        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start'
     }), document.getElementById('careerForm') as HTMLFormElement, [
         {
             name: 'phone',
             rules: [
-                {type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: {min: 9}},
-                {type: 'phone', message: 'Telefon musí být v platném formátu.'},
-                {type: 'required', message: 'Telefon je povinný.'},
-            ],
+                { type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: { min: 9 } },
+                { type: 'phone', message: 'Telefon musí být v platném formátu.' },
+                { type: 'required', message: 'Telefon je povinný.' }
+            ]
         },
         {
             name: 'salary',
             rules: [
-                {type: 'required', message: 'Plat je povinný.'},
-            ],
+                { type: 'required', message: 'Plat je povinný.' }
+            ]
         },
         {
             name: 'jobName',
             rules: [
-                {type: 'required', message: 'Pozice je povinná.'},
-            ],
+                { type: 'required', message: 'Pozice je povinná.' }
+            ]
+        }
+    ])
+
+    CareerFormDetail(FormValidator({
+        ...settings,
+        errorClasses: 'is-invalid',
+        neutralClasses: 'is-neutral',
+        alertSuccessBg: 'bg-success text-white fw-bold mb-3 p-3 rounded-3 text-start',
+        alertErrorBg: 'bg-danger text-white fw-bold mb-3 p-3 rounded-3 text-start'
+    }), document.getElementById('careerFormDetail') as HTMLFormElement, [
+        {
+            name: 'jobName',
+            rules: [
+                { type: 'required', message: 'Pozice je povinná.' }
+            ]
         },
+        {
+            name: 'salary',
+            rules: []
+        },
+        {
+            name: 'firstName',
+            rules: [
+                { type: 'required', message: 'Jméno je povinné.' }
+            ]
+        },
+        {
+            name: 'lastName',
+            rules: [
+                { type: 'required', message: 'Příjmení je povinné.' }
+            ]
+        },
+        {
+            name: 'phone',
+            rules: [
+                { type: 'min', message: 'Telefon musí mít alespoň 9 znaků.', param: { min: 9 } },
+                { type: 'phone', message: 'Telefon musí být v platném formátu.' },
+                { type: 'required', message: 'Telefon je povinný.' }
+            ]
+        }
     ])
 
 
     // Google map
     if (document.getElementById('google-map-contacts')) {
-        await LoadGoogleMapApi();
-        CreateContactMap();
+        await LoadGoogleMapApi()
+        CreateContactMap()
     }
 
-    const app = document.getElementById('checkout-with-map');
+    const app = document.getElementById('checkout-with-map')
     if (app) {
-        createApp(CheckoutWithMap, {...app.dataset}).mount(`#checkout-with-map`);
+        createApp(CheckoutWithMap, { ...app.dataset }).mount(`#checkout-with-map`)
     }
-})();
+})()

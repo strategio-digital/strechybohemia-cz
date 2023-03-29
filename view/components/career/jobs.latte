@@ -4,6 +4,7 @@
  *}
 
 {varType array $jobData}
+{varType Strategio\Controller\CareerController $controller}
 
 {foreach $jobData['items'] as $item}
     <div class="bg-white p-4 rounded-2 shadow-sm {if !$iterator->isLast()}mb-3{/if}" data-job="true" data-salary="{(int)$item['descriptionExtra']}" data-job-name="{$item['descriptionShort']}" data-job-full-name="{$item['title']}">
@@ -15,7 +16,7 @@
                 Mzda: <span class="fw-bold text-success">{(int)$item['descriptionExtra']|number: 0, '', ' '} Kč</span>
             </div>
             <div class="col-3 col-lg-2 order-1 order-lg-2 text-end">
-                <a href="#volne-pozice" class="btn btn-sm btn-outline-secondary" data-set-job="true">Poptat</a>
+                <a href="{$controller->link('career_detail', ['slug' => $item['slug']])}" class="btn btn-sm btn-outline-primary">Více</a>
             </div>
         </div>
     </div>

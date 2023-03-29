@@ -1,0 +1,58 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType array $data}
+{varType array $files}
+{varType array $file}
+{varType array|null $cover}
+{varType Strategio\Controller\CareerController $controller}
+
+{extends './../@layout.latte'}
+
+{php $files = array_filter($data['item']['files'], fn($file) => Nette\Utils\Strings::startsWith($file['mimeType'], 'image/'))}
+{php $cover = current(array_filter($files, fn($file) => $file['cover'] === true))}
+{php $files = array_filter($files, fn($file) => $file['cover'] !== true)}
+
+{block head}
+    {include './../components/article/head.latte'}
+    {include parent}
+{/block}
+
+{block content}
+    <header class="py-5 py-md-8" style="background-color: #e44c4c">
+        <div class="container position-relative text-white text-center">
+            <div class="h4 fw-bold text-uppercase mb-2 text-white text-opacity-75">Kariéra</div>
+            <h1 class="display-4 fw-bold mb-0">{$data['item']['title']}</h1>
+        </div>
+    </header>
+
+    <section class="position-relative">
+        <div class="position-relative bg-white py-5 py-md-7">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-7 order-0">
+                        {if count($data['item']['paragraphs']) !== 0}
+                            {include './../components/paragraphs.latte'}
+                        {else}
+                            <h2>Připravuje se...</h2>
+                            <p class="lead">Na tuto stránku brzy doplníme další informace.</p>
+                            <a href="{$controller->link('career')}" class="text-decoration-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                </svg>
+                                <span>zpět na přehled pozic</span>
+                            </a>
+                        {/if}
+                    </div>
+
+                    <div class="col-lg-5 mt-5 mt-lg-0">
+                        {include './../components/career/form-detail.latte'}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{/block}

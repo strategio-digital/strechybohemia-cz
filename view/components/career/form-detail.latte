@@ -1,0 +1,62 @@
+{*
+ * Copyright (c) 2022 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.digital, jz@strategio.digital)
+ *}
+
+{varType array $data}
+
+<div class="shadow rounded-3 mt-md-0">
+    <div class="rounded-top rounded-top-3 overflow-hidden" n:if="$data['item']['videoLink']">
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube-nocookie.com/embed/{$data['item']['videoLink']|replace:'https://youtu.be/'}" title="{$data['item']['title']}" allowfullscreen></iframe>
+        </div>
+    </div>
+    <form id="careerFormDetail" class="rounded-3 rounded-bottom-3 p-4 p-lg-5 bg-white">
+        <h2 class="h3 mb-4 fw-bold">Žádost o práci</h2>
+        <div class="form-floating mb-3" data-v-group>
+            <input name="jobName" id="jobName" type="text" class="form-control" value="{$data['item']['title']}" readonly>
+            <label for="jobName">
+                <span class="text-danger">*</span> Pozice
+            </label>
+            <div class="invalid-feedback" data-v-message></div>
+        </div>
+        <div class="form-floating mb-3" data-v-group>
+            {if $data['item']['descriptionExtra']}
+                <input name="salary" id="salary" type="text" class="form-control" value="{(int)$data['item']['descriptionExtra']|number: 0, '', ' '} Kč" readonly>
+                <label for="salary">
+                    <span class="text-danger">*</span> Mzda
+                </label>
+            {else}
+                <input name="salary" id="salary" type="hidden" value="neuvedeno">
+            {/if}
+            <div class="invalid-feedback" data-v-message></div>
+        </div>
+        <div class="form-floating mb-3" data-v-group>
+            <input name="firstName" id="firstName" type="text" class="form-control" placeholder="Zadejte jméno">
+            <label for="firstName">
+                <span class="text-danger">*</span> Vaše jméno
+            </label>
+            <div class="invalid-feedback" data-v-message></div>
+        </div>
+        <div class="form-floating mb-3" data-v-group>
+            <input name="lastName" id="lastName" type="text" class="form-control" placeholder="Zadejte příjmení">
+            <label for="lastName">
+                <span class="text-danger">*</span> Vaše příjmení
+            </label>
+            <div class="invalid-feedback" data-v-message></div>
+        </div>
+        <div class="form-floating mb-3" data-v-group>
+            <input name="phone" id="phone" type="text" class="form-control" placeholder="Zadejte telefon">
+            <label for="phone">
+                <span class="text-danger">*</span> Váš telefon
+            </label>
+            <div class="invalid-feedback" data-v-message></div>
+        </div>
+
+        <div data-v-alerts></div>
+
+        <button class="btn-warning shadow btn btn-lg w-100 py-3 fw-bold" type="submit">
+            <span class="fs-6">Odeslat žádost o práci</span>
+        </button>
+    </form>
+</div>

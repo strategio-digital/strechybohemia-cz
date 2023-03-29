@@ -57,4 +57,31 @@ class CareerController extends BaseController
         $this->template->jobSalaries = CareerHelper::getSalaries($jobData['items']);
         $this->template->jobShortNames = CareerHelper::getShortJobNames($jobData['items']);
     }
+    
+    #[Template(path: __DIR__ . '/../../view/controller/career-detail.latte')]
+    public function detail(string $slug) : void
+    {
+        $this->addRequest('career_detail', 'POST', "article/show-one", [
+            'json' => [
+                'slug' => $slug,
+                'suppressLabels' => true,
+                'suppressFiles' => false,
+                'suppressParagraphs' => false,
+                'suppressParagraphFiles' => false,
+                'suppressPrevNext' => false,
+                'suppressPrevNextFiles' => false,
+                'prevNextByLabel' => 'pracovni-pozice'
+            ]
+        ]);
+    
+        $responses = $this->dispatchRequests('Career Detail');
+        $response = $responses['career_detail'];
+        $contents = $response->getBody()->getContents();
+    
+        if ($response->getStatusCode() !== Response::HTTP_OK) {
+            $this->renderError($response, $contents);
+        }
+    
+        $this->template->data = json_decode($contents, true);
+    }
 }
