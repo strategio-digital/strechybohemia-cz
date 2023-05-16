@@ -38,7 +38,7 @@ class RevisionDataset
                 ]
             ],
             [
-                'title' => 'Kontrola ochraných prvků',
+                'title' => 'Kontrola ochranných prvků',
                 'description' => [
                     'Kontroluje se funkčnost prvků sloužících k ochraně proti pádu ze střechy tj, bezpečnostní háky, úvazová místa apod.'
                 ]
@@ -58,18 +58,6 @@ class RevisionDataset
     public function getPackages(): array
     {
         return [
-            'mini' => [
-                // Při úpravě klíče, názvu nebo ceny je potřeba hodnoty upravit i v app.strechybohemia.cz
-                'name' => 'Mini',
-                'price' => 3000,
-                'evidencePrice' => 3000,
-                'items' => [
-                    ['title' => 'Jenorázová kontrola', 'description' => []],
-                    ['title' => 'Vzdálená technická konzultace', 'description' => []],
-                    ['title' => 'Vyřízení do 30 dnů', 'description' => []],
-                ],
-                'label' => null
-            ],
             'standard' => [
                 // Při úpravě klíče, názvu nebo ceny je potřeba hodnoty upravit i v app.strechybohemia.cz
                 'name' => 'Standard',

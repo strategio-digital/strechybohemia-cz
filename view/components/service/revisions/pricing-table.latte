@@ -26,8 +26,8 @@
 
 <div class="container">
     <h2 class="h1 mb-5 fw-bold text-white text-center">Balíčky revizních kontrol</h2>
-    <div class="row">
-        <div class="col-md-6 col-xl-3 mt-4" n:foreach="$revisions->getPackages() as $packageName => $package">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-xl-4 mt-4" n:foreach="$revisions->getPackages() as $packageName => $package">
             {var $class = $iterator->getCounter() === 3 ? 'shadow-lg'}
             {var $style = $iterator->getCounter() !== 3 ? 'border: 3px solid #fff' : 'border: 3px solid ##dc3545'}
             <div class="p-4 bg-white rounded-3 {$class}" style="{$style}">
