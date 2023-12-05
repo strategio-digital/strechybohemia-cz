@@ -157,6 +157,11 @@ class NavbarDataset
                         'link' => $this->generator->generate('article_detail', ['label' => 'o-nas', 'slug' => 'nase-certifikace']),
                         'active' => false,
                     ],
+                    [
+                        'name' => 'Spolupráce SPŠ Tábor',
+                        'link' => $this->generator->generate('cooperation'),
+                        'active' => false
+                    ]
                 ]
             ],
             [

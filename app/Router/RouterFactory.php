@@ -15,6 +15,7 @@ use Strategio\Controller\ArticleController;
 use Strategio\Controller\RedirectController;
 use Strategio\Controller\ReferenceController;
 use Strategio\Controller\ServiceController;
+use Strategio\Controller\CooperationController;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 class RouterFactory extends BaseRouter
@@ -41,6 +42,8 @@ class RouterFactory extends BaseRouter
         $this->add('reference_detail', '/reference/{slug}', [ReferenceController::class, 'detail']);
     
         $this->add('article_detail', '/{label}/{slug}', [ArticleController::class, 'index']);
+        
+        $this->add('cooperation', '/spoluprace-sps-tabor', [CooperationController::class, 'index']);
         
         return $routes;
     }

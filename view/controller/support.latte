@@ -1,0 +1,44 @@
+{*
+ * Copyright (c) 2023 Strategio Digital s.r.o.
+ * @author Jiří Zapletal (https://strategio.dev, jz@strategio.dev)
+ *}
+
+{varType ContentioSdk\Component\AssetLoader $assets}
+
+{extends './../@layout.latte'}
+
+{block head}
+    {include parent}
+{/block}
+
+{block content}
+    <header class="py-5 py-md-8" style="background-color: rgba(225,56,56,0.9); background-image: url({$assets->get('/img/section-bg.png')});">
+        <div class="container text-white">
+            <div class="row align-items-md-end align-items-lg-center">
+                <div class="col-md-7 col-lg-8">
+                    <h1 class="display-4 fw-bold mb-0">Spolupráce SPŠ&nbsp;Tábor</h1>
+                </div>
+                <div class="col-md-5 col-lg-4 mt-4 mt-md-0 text-md-end">
+                    <img src="{$assets->get('/img/eu-logo.svg')}" alt="Spolupráce SPŠ Tábor" class="img-fluid" style="max-width: 340px">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-5 py-md-7">
+        <div class="container typography">
+            <p>
+                Snažíme se o inovativní přístup ke vzdělávání. Klíčem k úspěchu je poskytnutí praktických prostorů a
+                lektorů přímo z praxe, což zajistí žákům střední školy přímý kontakt s reálným pracovním prostředím.
+                Tato spolupráce je zásadní pro zlepšení kvality odborného vzdělávání a přípravy budoucích odborníků,
+                čímž výrazně přispívá k jejich budoucí profesní dráze a rozvoji dovedností potřebných v moderním světě.
+            </p>
+
+            <a href="{$assets->get('/img/spoluprace-sps-tabor.pdf')}" target="_blank" title="Spolupráce SPŠ Tábor">
+                <img src="{$assets->get('/img/spoluprace-sps-tabor.jpg')}" alt="Spolupráce SPŠ Tábor" class="img-fluid border rounded">
+            </a>
+        </div>
+    </section>
+
+    {include './../components/page-footer-cta.latte'}
+{/block}
