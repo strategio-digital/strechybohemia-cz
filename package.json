@@ -14,7 +14,7 @@
     },
     "scripts": {
         "dev": "npx mix",
-        "prod": "npx mix --production",
+        "build": "npx mix --production",
         "watch": "npx mix watch"
     }
 }
