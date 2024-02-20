@@ -10,7 +10,7 @@
         <span class="text-dark">{{ form.address }}</span>
       </p>
       <p class="text-black-50 mb-1">
-        Cena vč. 15% DPH:
+        Cena bez DPH:
         <span class="text-dark">{{ fullPrice }} Kč</span>
       </p>
     </div>
