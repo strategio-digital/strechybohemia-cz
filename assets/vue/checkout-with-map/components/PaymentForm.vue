@@ -18,14 +18,6 @@
     <div class="h5 mb-3">Zvolte způsob úhrady</div>
 
     <div class="form-check mb-3">
-      <input class="form-check-input" type="radio" name="payment" :value="'online_payment'" id="payment-2"
-             @input="changePayment" :checked="payment.type === 'online_payment'" disabled>
-      <label class="form-check-label" for="payment-2">
-        Online platba kartou <span class="fw-bold">(dočasně nedostupné)</span>
-        <span class="d-block small text-black-50">(Okamžitá platba přes platební bránu GoPay)</span>
-      </label>
-    </div>
-    <div class="form-check mb-3">
       <input class="form-check-input" type="radio" name="payment" :value="'bank_transfer'" id="payment-1"
              @input="changePayment" :checked="payment.type === 'bank_transfer'">
       <label class="form-check-label" for="payment-1">

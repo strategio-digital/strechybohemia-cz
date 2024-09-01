@@ -31,8 +31,6 @@
 
 <script type="ts">
 import {defineComponent} from "vue";
-import {trackOnePurchase} from "../../../../vendor/strategio/contentio-sdk/assets/typescript/Components/Measurement";
-import Axios from "../../../typescript/Plugins/OldApiAxios";
 
 export default defineComponent({
   props: ['payment', 'submitHandler', 'resetHandler'],
@@ -40,23 +38,6 @@ export default defineComponent({
     backwardClick() {
       this.resetHandler();
       this.submitHandler('', 1)
-    }
-  },
-  async mounted() {
-    if (this.payment.state === 'waiting' || this.payment.state === 'paid') {
-      const response = await Axios().post('order/store-in-gtm', {id: this.payment.order_id});
-      // TODO: connect to SDK tracking
-      if (!response.data.gtm_already_stored) {
-        trackOnePurchase(
-            response.data.product_id,
-            response.data.product_name,
-            'servis',
-            response.data.order_id,
-            response.data.price_with_tax,
-            response.data.price_without_tax,
-            response.data.tax
-        );
-      }
     }
   }
 })
